@@ -1,4 +1,5 @@
 #include <string>
+using namespace std;
 
 class TableEntry{
 private:
@@ -7,6 +8,7 @@ private:
     int *lineNumber;
     float *value;
     TableEntry *next;
+    
 public:
     TableEntry();
     TableEntry(string lexeme, int token, int lineNumber, int value);
