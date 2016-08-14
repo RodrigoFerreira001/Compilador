@@ -4,27 +4,27 @@ using namespace std;
 class TableEntry{
 private:
     string *lexeme;
-    int *token;
+    string *token;
     int *lineNumber;
     float *value;
     TableEntry *next;
-    
+
 public:
     TableEntry();
-    TableEntry(string lexeme, int token, int lineNumber, int value);
+    TableEntry(string lexeme, string token, int lineNumber, int value);
     ~TableEntry();
 
     void setLexeme(string lexeme);
-    string getLexeme();
+    string getLexeme() const;
 
-    void setToken(int token);
-    int getToken();
+    void setToken(string token);
+    string getToken() const;
 
     void setLineNumber(int lineNumber);
-    int getLineNumber();
+    int getLineNumber() const;
 
     void setValue(float value);
-    float getValue();
+    float getValue() const;
 
-    TableEntry *getNextEntry();
+    TableEntry *getNextEntry() const;
 };

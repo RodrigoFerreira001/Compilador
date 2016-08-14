@@ -3,15 +3,15 @@
 //Construtor padrão
 TableEntry::TableEntry(){
     this->lexeme = new string;
-    this->token = new int;
+    this->token = new string;
     this->lineNumber = new int;
     this->value = new float;
 }
 
 //Construtor padrão
-TableEntry::TableEntry(string lexeme, int token, int lineNumber, int value){
+TableEntry::TableEntry(string lexeme, string token, int lineNumber, int value){
     this->lexeme = new string;
-    this->token = new int;
+    this->token = new string;
     this->lineNumber = new int;
     this->value = new float;
 
@@ -40,15 +40,15 @@ void TableEntry::setLexeme(string lexeme){
     *(this->lexeme) = lexeme;
 }
 
-string TableEntry::getLexeme(){
+string TableEntry::getLexeme() const{
     return *(this->lexeme);
 }
 
-void TableEntry::setToken(int token){
+void TableEntry::setToken(string token){
     *(this-> token) = token;
 }
 
-int TableEntry::getToken(){
+string TableEntry::getToken() const{
     return *(this->token);
 }
 
@@ -56,7 +56,7 @@ void TableEntry::setLineNumber(int lineNumber){
     *(this->lineNumber) = lineNumber;
 }
 
-int TableEntry::getLineNumber(){
+int TableEntry::getLineNumber() const{
     return *(this->lineNumber);
 }
 
@@ -64,10 +64,10 @@ void TableEntry::setValue(float value){
     *(this->value) = value;
 }
 
-float TableEntry::getValue(){
+float TableEntry::getValue() const{
     return *(this->value);
 }
 
-TableEntry* TableEntry::getNextEntry(){
+TableEntry* TableEntry::getNextEntry() const{
     return this->next;
 }
