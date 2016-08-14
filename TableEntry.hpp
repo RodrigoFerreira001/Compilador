@@ -9,11 +9,12 @@ private:
     string *token;
     int *lineNumber;
     float *value;
+    int *tokenVecPosition;
     TableEntry *next;
 
 public:
     TableEntry();
-    TableEntry(string lexeme, string token, int lineNumber, int value);
+    TableEntry(string lexeme, string token, int lineNumber, float value, int tokenVecPosition);
     ~TableEntry();
 
     void setLexeme(string lexeme);
@@ -28,5 +29,9 @@ public:
     void setValue(float value);
     float getValue() const;
 
+    void setTokenVecPosition(int tokenVecPosition);
+    float getTokenVecPosition() const;
+
+    void setNextEntry(TableEntry* tableEntry);
     TableEntry *getNextEntry() const;
 };
