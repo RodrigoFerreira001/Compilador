@@ -15,10 +15,10 @@ TableEntry::TableEntry(string lexeme, string token, int lineNumber, int value){
     this->lineNumber = new int;
     this->value = new float;
 
-    this->lexeme = lexeme;
-    this->token = token;
-    this->lineNumber = lineNumber;
-    this->value = value;
+    *(this->lexeme) = lexeme;
+    *(this->token) = token;
+    *(this->lineNumber) = lineNumber;
+    *(this->value) = value;
 }
 
 TableEntry::~TableEntry(){

@@ -5,7 +5,8 @@ using namespace std;
 
 class SymbolTable{
 private:
-    map <string,TableEntry> hashMap;
+    map<string,TableEntry>*  hashMap;
+
 public:
     SymbolTable();
     ~SymbolTable();
