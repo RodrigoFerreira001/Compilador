@@ -5,20 +5,19 @@ using namespace std;
 
 class TableEntry{
 private:
-    string *lexeme;
-    string *token;
-    int *lineNumber;
-    float *value;
-    int *tokenVecPosition;
-    TableEntry *next;
+    string* lexeme;
+    string* token;
+    int* lineNumber;
+    float* value;
+    TableEntry* next;
 
 public:
     TableEntry();
-    TableEntry(string lexeme, string token, int lineNumber, float value, int tokenVecPosition);
+    TableEntry(string lexeme, string token, int lineNumber, float value);
     ~TableEntry();
 
     void setLexeme(string lexeme);
-    string getLexeme() const;
+    string getLexeme();
 
     void setToken(string token);
     string getToken() const;
@@ -29,9 +28,6 @@ public:
     void setValue(float value);
     float getValue() const;
 
-    void setTokenVecPosition(int tokenVecPosition);
-    float getTokenVecPosition() const;
-
-    void setNextEntry(TableEntry* tableEntry);
-    TableEntry *getNextEntry() const;
+    void setNextEntry(TableEntry* entry);
+    TableEntry* getNextEntry() const;
 };

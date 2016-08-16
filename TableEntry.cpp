@@ -10,19 +10,17 @@ TableEntry::TableEntry(){
 }
 
 //Construtor padrão
-TableEntry::TableEntry(string lexeme, string token, int lineNumber, float value, int tokenVecPosition){
+TableEntry::TableEntry(string lexeme, string token, int lineNumber, float value){
     this->lexeme = new string;
     this->token = new string;
     this->lineNumber = new int;
     this->value = new float;
-    this->tokenVecPosition = new int;
     this->next = NULL;
 
     *(this->lexeme) = lexeme;
     *(this->token) = token;
     *(this->lineNumber) = lineNumber;
     *(this->value) = value;
-    *(this->tokenVecPosition) = tokenVecPosition;
 }
 
 TableEntry::~TableEntry(){
@@ -30,7 +28,6 @@ TableEntry::~TableEntry(){
     delete this->token;
     delete this->lineNumber;
     delete this->value;
-    delete this->tokenVecPosition;
 
     TableEntry *tmp;
 
@@ -45,7 +42,7 @@ void TableEntry::setLexeme(string lexeme){
     *(this->lexeme) = lexeme;
 }
 
-string TableEntry::getLexeme() const{
+string TableEntry::getLexeme(){
     return *(this->lexeme);
 }
 
@@ -73,16 +70,8 @@ float TableEntry::getValue() const{
     return *(this->value);
 }
 
-void setTokenVecPosition(int tokenVecPosition){
-    *(this->tokenVecPosition) = tokenVecPosition;
-}
-
-float getTokenVecPosition() const{
-    return *(this->tokenVecPosition);
-}
-
-void TableEntry::setNextEntry(TableEntry* tableEntry){
-    this->next = tableEntry;
+void TableEntry::setNextEntry(TableEntry* entry){
+    this->next = entry;
 }
 
 TableEntry* TableEntry::getNextEntry() const{
