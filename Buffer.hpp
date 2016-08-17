@@ -16,8 +16,8 @@ private:
 	string* buffer;
 
 public:
-	Buffer();
-	Buffer(int size);
+	Buffer(char* fileName);
+	Buffer(int size, char* fileName);
 	~Buffer();
 
 	void setMaxSize(int maxSize);
@@ -27,8 +27,9 @@ public:
 	int getActualSize();
 	int getNumLines();
 	string getBuffer();
+	char getNextChar();
 
-	void load(char* fileName);
+	void reload();
 	void print();
 	int isFull();
 };

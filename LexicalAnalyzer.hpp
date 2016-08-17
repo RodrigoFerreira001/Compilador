@@ -8,7 +8,7 @@ using namespace std;
 
 class LexicalAnalyzer{
 private:
-    //Buffer* charBuffer;
+    Buffer* charBuffer;
     vector<string, TableEntry*>* tokenVector;
     SymbolTable* symbolTable;
 
