@@ -68,7 +68,7 @@ string Buffer::getBuffer() {
 
 
 // Methods
-void Buffer::load(char* fileName) {
+void Buffer::reload(char* fileName) {
 	
 	ifstream read;
 	read.open(fileName);
@@ -86,6 +86,12 @@ void Buffer::load(char* fileName) {
 	}
 
 	read.close();
+}
+
+char Buffer::getNextChar(){
+	if(...){
+		reload();
+	}
 }
 
 void Buffer::print(){
