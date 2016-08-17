@@ -4,12 +4,15 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <cstdlib>
 using namespace std;
 
 class Buffer{
 private:
-	int* size;
-	int* line;
+	int* maxSize;
+	int* actualSize;
+	int* numLines;
+	int* filePos;
 	string* buffer;
 
 public:
@@ -17,8 +20,15 @@ public:
 	Buffer(int size);
 	~Buffer();
 
-	void setSize(int sz);
-	int getSize();
+	void setMaxSize(int maxSize);
+	void setActualSize(int ActualSize);
+	void setNumLines(int NumLines);
+	int getMaxSize();
+	int getActualSize();
+	int getNumLines();
+	string getBuffer();
+
 	void load(char* fileName);
 	void print();
+	int isFull();
 };
