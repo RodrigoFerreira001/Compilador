@@ -13,16 +13,21 @@ private:
 	int* actualSize;
 	int* numLines;
 	int* filePos;
+
 	string* buffer;
+	string* strTmp;
+
+	ifstream read;
 
 public:
-	Buffer(char* fileName);
+	Buffer();
 	Buffer(int size, char* fileName);
 	~Buffer();
 
 	void setMaxSize(int maxSize);
 	void setActualSize(int ActualSize);
 	void setNumLines(int NumLines);
+
 	int getMaxSize();
 	int getActualSize();
 	int getNumLines();
@@ -31,5 +36,5 @@ public:
 
 	void reload();
 	void print();
-	int isFull();
+	bool EOB();
 };
