@@ -208,14 +208,51 @@ void LexicalAnalyzer::start(){
 						Token token("INT", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
-					}else
-					if(lexeme == "float"){
+					}else if(lexeme == "float"){
 						TableEntry* tableEntry = new TableEntry(lexeme,"FLOAT",0,0);
 						// VERIFICAR O MÉTODO CERTO
 						Token token("FLOAT", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
+					}else if(lexeme == "if"){
+						TableEntry* tableEntry = new TableEntry(lexeme,"IF",0,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("IF", tableEntry);
+						this->tokenVector->push_back(token);
+						lexeme.clear();
+					}else if(lexeme == "else"){
+						TableEntry* tableEntry = new TableEntry(lexeme,"ELSE",0,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("ELSE", tableEntry);
+						this->tokenVector->push_back(token);
+						lexeme.clear();
+					}else if(lexeme == "while"){
+						TableEntry* tableEntry = new TableEntry(lexeme,"WHILE",0,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("WHILE", tableEntry);
+						this->tokenVector->push_back(token);
+						lexeme.clear();
+					}else if(lexeme == "read"){
+						TableEntry* tableEntry = new TableEntry(lexeme,"READ",0,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("READ", tableEntry);
+						this->tokenVector->push_back(token);
+						lexeme.clear();
+					}else if(lexeme == "print"){
+						TableEntry* tableEntry = new TableEntry(lexeme,"PRINT",0,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("PRINT", tableEntry);
+						this->tokenVector->push_back(token);
+						lexeme.clear();
+					}else {
+						TableEntry* tableEntry = new TableEntry(lexeme,"ID",this->charBuffer->getNumLines,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("ID", tableEntry);
+						this->tokenVector->push_back(token);
+						this->hashMap->insertEntry(tableEntry);
+						lexeme.clear();
 					}
+
 				}
 				break;
 
@@ -235,6 +272,7 @@ void LexicalAnalyzer::start(){
 					// VERIFICAR O MÉTODO CERTO
 					Token token("NUMBER", tableEntry);
 					this->tokenVector->push_back(token);
+					this->hashMap->insertEntry(tableEntry);
 					lexeme.clear();
 					//MOVER O CURSOR DO BUFFER PARA TRÁS
 				}
@@ -253,6 +291,7 @@ void LexicalAnalyzer::start(){
 					// VERIFICAR O MÉTODO CERTO
 					Token token("NUMBER", tableEntry);
 					this->tokenVector->push_back(token);
+					this->hashMap->insertEntry(tableEntry);
 					lexeme.clear();
 					//MOVER O CURSOR DO BUFFER PARA TRÁS
 				}
