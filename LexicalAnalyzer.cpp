@@ -201,13 +201,21 @@ void LexicalAnalyzer::start(){
 					lexeme.push_back(c);
 					state = 7;
 				}else{
-					//COMPARAR COM OS LEXEMAS
-					TableEntry* tableEntry = new TableEntry(lexeme,"ID",this->charBuffer->getNumLines,0);
-					// VERIFICAR O MÉTODO CERTO
-					Token token("ID", tableEntry);
-					this->tokenVector->push_back(token);
-					lexeme.clear();
 					//MOVER O CURSOR DO BUFFER PARA TRÁS
+					if(lexeme == "int"){
+						TableEntry* tableEntry = new TableEntry(lexeme,"INT",0,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("INT", tableEntry);
+						this->tokenVector->push_back(token);
+						lexeme.clear();
+					}else
+					if(lexeme == "float"){
+						TableEntry* tableEntry = new TableEntry(lexeme,"FLOAT",0,0);
+						// VERIFICAR O MÉTODO CERTO
+						Token token("FLOAT", tableEntry);
+						this->tokenVector->push_back(token);
+						lexeme.clear();
+					}
 				}
 				break;
 
