@@ -1,7 +1,9 @@
 #include "LexicalAnalyzer.hpp"
 
-LexicalAnalyzer::LexicalAnalyzer(Buffer* charBuffer, vector<string, TableEntry*>* tokenVector, SymbolTable* symbolTable){
-
+LexicalAnalyzer::LexicalAnalyzer(Buffer* charBuffer, vector<Token>* tokenVector, SymbolTable* symbolTable){
+	this->charBuffer = charBuffer;
+	this->tokenVector = tokenVector;
+	this->symbolTable = symbolTable;
 }
 
 void LexicalAnalyzer::start(){
@@ -14,24 +16,61 @@ void LexicalAnalyzer::start(){
 			case 0:
 				char c = this->charBuffer->getNextChar();
 
-				if(c == '<') state = 1;
-				else if(c == '>') state = 2;
-				else if(c == '=') state = 3;
-				else if(c == '!') state = 4;
-				else if(c == '(') ;
-				else if(c == ')') ;
-				else if(c == '{') ;
-				else if(c == '}') ;
-				else if(c == ',') ;
-				else if(c == ';') ;
-				else if(c == '|') state = 5;
-				else if(c == '&') state = 6;
-				else if(c == '+') ;
-				else if(c == '-') ;
-				else if(c == '*') ;
-				else if(c == '/') ;
-				else if(c => 'a' && c <= 'z' || c => 'A' && c <= 'Z') state = 7;
-				else if(c => '0' && c <= '9') state = 8;
+				if(c == '<'){
+					state = 1;
+				}else
+				if(c == '>'){
+					state = 2;
+				}else
+				if(c == '='){
+					state = 3;
+				}else
+				if(c == '!'){
+					state = 4;
+				}else
+				if(c == '('){
+					TableEntry* tableEntry = new TableEntry(string("("),"LBRACKET",0,0);
+					Token token("LBRACKET", tableEntry);
+					this->tokenVector->push_back(token);
+				}else
+				if(c == ')'){
+					
+				}else
+				if(c == '{'){
+					
+				}else
+				if(c == '}'){
+					
+				}else
+				if(c == ','){
+					
+				}else if(c == ';'){
+					
+				}else
+				if(c == '|'){
+					state = 5;
+				}else
+				if(c == '&'){
+					state = 6;
+				}else
+				if(c == '+'){
+					
+				}else
+				if(c == '-'){
+					
+				}else
+				if(c == '*'){
+					
+				}else
+				if(c == '/'){
+					
+				}else
+				if(c => 'a' && c <= 'z' || c => 'A' && c <= 'Z'){
+					state = 7;
+				}else
+				if(c => '0' && c <= '9'){
+					state = 8;
+				}
 
 				lexeme.push_back(c);
 				break;
