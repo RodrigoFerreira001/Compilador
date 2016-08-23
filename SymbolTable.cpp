@@ -114,7 +114,7 @@ SymbolTable::~SymbolTable(){
 }
 
 void SymbolTable::insertEntry(TableEntry* entry){
-    if(entry->getToken() == "ID" || entry->getToken() == "NUMBER" || entry->getToken() == "TETA"){
+    if(entry->getToken() == "ID" || entry->getToken() == "NUMBER"){
         if(this->hashMap->count(entry->getLexeme()) == 0){
             this->hashMap->insert(pair<string, TableEntry*> (entry->getLexeme(), entry));
         }else{
