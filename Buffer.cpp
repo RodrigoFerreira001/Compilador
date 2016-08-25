@@ -3,167 +3,129 @@
 // Standard constructor
 Buffer::Buffer() {
 	this->maxSize = new int;
-	this->actualSize = new int;
-	this->numLines = new int;
-	this->buffer = new string;
+	this->bI = new int;
+	this->currentLine = new int;
+	this->currentPos = new int;
+	this->filePos = new int;
+	this->buffer = new string();
 }
 
 // Constructor with parameters
-Buffer::Buffer(int maxSize, char* fileName) {
+Buffer::Buffer(int maxSize, ifstream* read) {
 	this->maxSize = new int;
 	*(this->maxSize) = maxSize;
-
-	this->actualSize = new int;
-	*(this->actualSize) = 0;
-
-	this->numLines = new int;
-	*(this->numLines) = 0;
 	
+	this->bI = new int;
+	*(this->bI) = 0;
+
+	this->currentLine = new int;
+	*(this->currentLine) = 1;
+
+	this->currentPos = new int;
+	*(this->currentPos) = 1;
+
+	this->filePos = new int;
+	*(this->filePos) = 0;
+
 	this->buffer = new string();
-	this->strTmp = new string();
 
-	this->read.open(fileName);
-	// Print an error and exit
-	if (!read) {
-        cerr << "ERROR: Input file could not be found!" << endl;
-        exit(EXIT_FAILURE);
- 	}
-
-    char tmp;
-    int aux = 0, capacity = 0;
-
-    // && (*(this->actualSize) < (*(this->maxSize) ))
-
-    // cout << "ENTREI AQUI" << endl;
-
-	do {
-		while(read.get(tmp)) {
-			if(tmp != '\n' && tmp != '\t' && tmp != ' ') {
-				this->strTmp->insert(aux++, 1, tmp);		
-			} else {
-				if(tmp == '\n' )
-					(*(this->numLines))++;
-				this->strTmp->insert(aux++, 1, tmp);
-				break;
-			}
-		}
-
-		capacity = (*(this->maxSize)) - (*(this->actualSize));
-		if(capacity < this->strTmp->length())
-			break;
-
-		this->buffer->insert(*(this->actualSize), *(this->strTmp));
-		(*(this->actualSize)) += aux;
-		this->strTmp->clear();
-		aux = 0;
-	} while(!read.eof());
+    this->reload(read);
 }
-
 
 // Destructor
 Buffer::~Buffer() {
 	delete this->maxSize;
-	delete this->actualSize;
-	delete this->numLines;
+	delete this->bI;
+	delete this->currentLine;
+	delete this->currentPos;
+	delete this->filePos;
 	delete this->buffer;
+
 }
 
 
-// Setters
-void Buffer::setMaxSize(int maxSize) {
-	*(this->maxSize) = maxSize;
-}
-
-void Buffer::setActualSize(int actualSize) {
-	*(this->actualSize) = actualSize;
-}
-
-void Buffer::setNumLines(int numLines) {
-	*(this->numLines) = numLines;
-}
-
-
-// Getters
-int Buffer::getMaxSize() {
-	return *(this->maxSize);
-}
-
-int Buffer::getActualSize() {
-	return *(this->actualSize);
-}
-
-int Buffer::getNumLines() {
-	return *(this->numLines);
-}
-
-string Buffer::getBuffer() {
-	return *(this->buffer);
-}
-
-
-// Methods
-void Buffer::reload() {
-	char tmp;
-	int aux = 0, capacity = 0;
-
-	if(this->strTmp->length() > 0) {
-		capacity = (*(this->maxSize)) - (*(this->actualSize));
-		if(capacity < this->strTmp->length())
-			return;
-		else {
-			this->buffer->insert(*(this->actualSize), *(this->strTmp));
-			(*(this->actualSize)) += this->strTmp->length();
-			this->strTmp->clear();
-		}
-	}
-
-	do {
-		while(read.get(tmp)) {
-			if(tmp != '\n' && tmp != '\t' && tmp != ' ') {
-				this->strTmp->insert(aux++, 1, tmp);		
-			} else {
-				if(tmp == '\n' )
-					(*(this->numLines))++;
-				this->strTmp->insert(aux++, 1, tmp);
-				break;
-			}
-		}
-
-		capacity = (*(this->maxSize)) - (*(this->actualSize));
-		if(capacity < this->strTmp->length())
-			break;
-
-		this->buffer->insert(*(this->actualSize), *(this->strTmp));
-		(*(this->actualSize)) += this->strTmp->length();
-		this->strTmp->clear();
-		aux = 0;
-	} while(!read.eof());
-}
-
-char Buffer::getNextChar() {
-	if(!this->EOB()){
-		if(this->buffer->length() == 0) {
-			this->reload();
+// ======================================================================
+// Public Methods
+char Buffer::getNextChar(ifstream* read) {
+	if(((this->fileIsEmpty(read)) && (*(this->bI)) == this->buffer->length())) {
+		return '\0';
+	} else {
+		if(this->readyToReload(read)) {
+			this->buffer->erase(0, *(bI) - 1);
+			*(this->bI) = this->buffer->length();
+			this->reload(read);
 		}
 		char tmp;
-		tmp = (this->buffer->at(0));
-		this->buffer->erase(0, 1);
-		(*(this->actualSize))--;
+		tmp = (this->buffer->at(*(this->bI)));
+
+		if(tmp == '\n'){
+			(*(this->currentLine))++;
+			(*(this->currentPos)) = 0;
+		}
+		
+		(*(this->currentPos))++;
+		(*(this->bI))++;
+		
 		return tmp;
 	}
 }
 
-void Buffer::print(){
-	cout << *(this->buffer) << endl;
-	cout << this->buffer->length() << endl;
-	cout << *(this->actualSize) << endl;
+void Buffer::ungetChar(){
+	(*(this->bI))--;
 }
 
-bool Buffer::EOB(){
-	if(this->read.eof() && this->strTmp->length() == 0 && this->buffer->length() == 0){
-		read.close();
+bool Buffer::EOB(ifstream* read){
+	if(fileIsEmpty(read) && (*(this->bI)) == this->buffer->length())
 		return true;
-	}
 	else
 		return false;
 }
+
+int Buffer::getCurrentLine(){
+	return *(this->currentLine);	
+}
+
+int Buffer::getCurrentPos(){
+	return *(this->currentPos);
+}
+
+// ======================================================================
+// Private Methods
+void Buffer::reload(ifstream* read) {
+	char tmp;
+
+	read->seekg((*(this->filePos)));
+    while(!this->bufferIsFull()) {
+    	if(!read->get(tmp))
+    		break;
+    	this->buffer->push_back(tmp);
+    	(*(this->filePos))++;
+    }
+}
+
+bool Buffer::bufferIsFull(){
+	if(this->buffer->length() < *(this->maxSize))
+		return false;
+	else
+		return true; 
+}
+
+bool Buffer::readyToReload(ifstream* read) {
+	if(*(this->bI) == *(this->maxSize) && !this->fileIsEmpty(read))
+		return true;
+	else
+		return false;
+}
+
+
+bool Buffer::fileIsEmpty(ifstream* read){
+	read->seekg(0, ios::end);
+	int length = read->tellg();
+
+	if(*(this->filePos) < length){
+		return false;
+	} else {
+		return true;
+	}
+}
+
