@@ -14,20 +14,21 @@ private:
 	int* currentLine;
 	int* currentPos;
 	int* filePos;
+	string* fileName;
 	string* buffer;
-	void reload(ifstream* read);
-	bool readyToReload(ifstream* read);
-	bool fileIsEmpty(ifstream* read);
+	void reload();
+	bool readyToReload();
+	bool fileIsEmpty();
 	bool bufferIsFull();
 
 
 public:
 	Buffer();
-	Buffer(int size, ifstream* read);
+	Buffer(int size, char* file);
 	~Buffer();
 
-	char getNextChar(ifstream* read);
-	bool EOB(ifstream* read);
+	char getNextChar();
+	bool eob();
 	void ungetChar();
 	int getCurrentLine();
 	int getCurrentPos();

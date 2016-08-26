@@ -8,10 +8,11 @@ Buffer::Buffer() {
 	this->currentPos = new int;
 	this->filePos = new int;
 	this->buffer = new string();
+	this->fileName = new string();
 }
 
 // Constructor with parameters
-Buffer::Buffer(int maxSize, ifstream* read) {
+Buffer::Buffer(int maxSize, char* file) {
 	this->maxSize = new int;
 	*(this->maxSize) = maxSize;
 	
@@ -28,8 +29,9 @@ Buffer::Buffer(int maxSize, ifstream* read) {
 	*(this->filePos) = 0;
 
 	this->buffer = new string();
+	this->fileName = new string(file);
 
-    this->reload(read);
+    this->reload();
 }
 
 // Destructor
@@ -40,20 +42,21 @@ Buffer::~Buffer() {
 	delete this->currentPos;
 	delete this->filePos;
 	delete this->buffer;
-
+	delete this->fileName;
 }
 
 
 // ======================================================================
 // Public Methods
-char Buffer::getNextChar(ifstream* read) {
-	if(((this->fileIsEmpty(read)) && (*(this->bI)) == this->buffer->length())) {
+char Buffer::getNextChar() {
+
+	if(((this->fileIsEmpty()) && (*(this->bI)) == this->buffer->length())) {
 		return '\0';
 	} else {
-		if(this->readyToReload(read)) {
+		if(this->readyToReload()) {
 			this->buffer->erase(0, *(bI) - 1);
 			*(this->bI) = this->buffer->length();
-			this->reload(read);
+			this->reload();
 		}
 		char tmp;
 		tmp = (this->buffer->at(*(this->bI)));
@@ -71,11 +74,12 @@ char Buffer::getNextChar(ifstream* read) {
 }
 
 void Buffer::ungetChar(){
-	(*(this->bI))--;
+	if((*(this->bI)) > 0)
+		(*(this->bI))--;
 }
 
-bool Buffer::EOB(ifstream* read){
-	if(fileIsEmpty(read) && (*(this->bI)) == this->buffer->length())
+bool Buffer::eob(){
+	if(fileIsEmpty() && (*(this->bI)) == this->buffer->length())
 		return true;
 	else
 		return false;
@@ -91,16 +95,21 @@ int Buffer::getCurrentPos(){
 
 // ======================================================================
 // Private Methods
-void Buffer::reload(ifstream* read) {
+void Buffer::reload() {
 	char tmp;
 
-	read->seekg((*(this->filePos)));
+	ifstream read;
+	read.open(this->fileName->c_str());
+
+	read.seekg((*(this->filePos)));
     while(!this->bufferIsFull()) {
-    	if(!read->get(tmp))
+    	if(!read.get(tmp))
     		break;
     	this->buffer->push_back(tmp);
     	(*(this->filePos))++;
     }
+
+    read.close();
 }
 
 bool Buffer::bufferIsFull(){
@@ -110,17 +119,22 @@ bool Buffer::bufferIsFull(){
 		return true; 
 }
 
-bool Buffer::readyToReload(ifstream* read) {
-	if(*(this->bI) == *(this->maxSize) && !this->fileIsEmpty(read))
+bool Buffer::readyToReload() {
+	if(*(this->bI) == *(this->maxSize) && !this->fileIsEmpty())
 		return true;
 	else
 		return false;
 }
 
 
-bool Buffer::fileIsEmpty(ifstream* read){
-	read->seekg(0, ios::end);
-	int length = read->tellg();
+bool Buffer::fileIsEmpty(){
+	ifstream read;
+	read.open(this->fileName->c_str());
+
+	read.seekg(0, ios::end);
+	int length = read.tellg();
+
+	read.close();
 
 	if(*(this->filePos) < length){
 		return false;
