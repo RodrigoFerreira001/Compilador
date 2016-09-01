@@ -14,9 +14,5 @@ int main(int argc, char **argv){
     //Zhuuuuu-li, Doooo the Thiing!!
     Zhuli->doTheThing();
 
-    symbolTable->getHashMap()->
-
-
-
     return 0;
 }
