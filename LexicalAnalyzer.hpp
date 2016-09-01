@@ -12,8 +12,8 @@ private:
     Buffer* charBuffer;
     vector<Token>* tokenVector;
     SymbolTable* symbolTable;
-    
+
 public:
-    LexicalAnalyzer(Buffer* charBuffer, vector<Token> tokenVector, SymbolTable* symbolTable);
+    LexicalAnalyzer(Buffer* charBuffer, vector<Token>* tokenVector, SymbolTable* symbolTable);
     void start();
 };

@@ -5,8 +5,8 @@ using namespace std;
 
 class Token{
 private:
-    string token;
-    TableEntry *tableEntry;
+    string* token;
+    TableEntry* tableEntry;
 
 public:
     Token();

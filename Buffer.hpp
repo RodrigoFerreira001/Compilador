@@ -23,7 +23,6 @@ private:
 
 
 public:
-	Buffer();
 	Buffer(int size, char* file);
 	~Buffer();
 

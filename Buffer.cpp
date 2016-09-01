@@ -1,21 +1,10 @@
 #include "Buffer.hpp"
 
-// Standard constructor
-Buffer::Buffer() {
-	this->maxSize = new int;
-	this->bI = new int;
-	this->currentLine = new int;
-	this->currentPos = new int;
-	this->filePos = new int;
-	this->buffer = new string();
-	this->fileName = new string();
-}
-
 // Constructor with parameters
 Buffer::Buffer(int maxSize, char* file) {
 	this->maxSize = new int;
 	*(this->maxSize) = maxSize;
-	
+
 	this->bI = new int;
 	*(this->bI) = 0;
 
@@ -65,10 +54,10 @@ char Buffer::getNextChar() {
 			(*(this->currentLine))++;
 			(*(this->currentPos)) = 0;
 		}
-		
+
 		(*(this->currentPos))++;
 		(*(this->bI))++;
-		
+
 		return tmp;
 	}
 }
@@ -86,7 +75,7 @@ bool Buffer::eob(){
 }
 
 int Buffer::getCurrentLine(){
-	return *(this->currentLine);	
+	return *(this->currentLine);
 }
 
 int Buffer::getCurrentPos(){
@@ -116,7 +105,7 @@ bool Buffer::bufferIsFull(){
 	if(this->buffer->length() < *(this->maxSize))
 		return false;
 	else
-		return true; 
+		return true;
 }
 
 bool Buffer::readyToReload() {
@@ -142,4 +131,3 @@ bool Buffer::fileIsEmpty(){
 		return true;
 	}
 }
-
