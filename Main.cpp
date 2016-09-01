@@ -11,10 +11,10 @@ int main(int argc, char **argv){
     vector<Token*>* tokenVector = new vector<Token*>();
 
     LexicalAnalyzer* Zhuli = new LexicalAnalyzer(buffer, tokenVector, symbolTable);
-
     //Zhuuuuu-li, Doooo the Thiing!!
     Zhuli->doTheThing();
 
+    symbolTable->getHashMap()->
 
 
 

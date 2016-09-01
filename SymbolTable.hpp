@@ -14,6 +14,6 @@ public:
     SymbolTable();
     ~SymbolTable();
     void insertEntry(TableEntry* entry);
-    map<string,TableEntry*> getHashMap();
+    map<string,TableEntry*>* getHashMap();
 
 };

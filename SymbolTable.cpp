@@ -125,6 +125,6 @@ void SymbolTable::insertEntry(TableEntry* entry){
     }
 }
 
-map<string,TableEntry*> SymbolTable::getHashMap(){
-    return *(this->hashMap);
+map<string,TableEntry*>* SymbolTable::getHashMap(){
+    return this->hashMap;
 }
