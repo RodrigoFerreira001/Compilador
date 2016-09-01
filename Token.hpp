@@ -1,5 +1,7 @@
 #pragma once
+
 #include <string>
+#include <iostream>
 #include "TableEntry.hpp"
 using namespace std;
 

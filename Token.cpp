@@ -11,7 +11,8 @@ Token::Token(string token, TableEntry* tableEntry){
 }
 
 Token::~Token(){
-    delete this->token;
+    cout << "Olá, Soy um cusaum!" << endl;
+    //delete this->token;
 }
 
 void Token::setToken(string token){

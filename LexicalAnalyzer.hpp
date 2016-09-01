@@ -10,10 +10,10 @@ using namespace std;
 class LexicalAnalyzer{
 private:
     Buffer* charBuffer;
-    vector<Token>* tokenVector;
+    vector<Token*>* tokenVector;
     SymbolTable* symbolTable;
 
 public:
-    LexicalAnalyzer(Buffer* charBuffer, vector<Token>* tokenVector, SymbolTable* symbolTable);
-    void start();
+    LexicalAnalyzer(Buffer* charBuffer, vector<Token*>* tokenVector, SymbolTable* symbolTable);
+    void doTheThing();
 };
