@@ -14,5 +14,22 @@ int main(int argc, char **argv){
     //Zhuuuuu-li, Doooo the Thiing!!
     Zhuli->doTheThing();
 
+    map <string, TableEntry*>::iterator it;
+    TableEntry* tmp;
+
+    cout << "Symbol Table Content:" << endl;
+    for(it =  symbolTable->getHashMap()->begin(); it != symbolTable->getHashMap()->end(); it++){
+    	if(it->second->getToken() == "ID"){
+    		cout << "Lexema: " << it->second->getLexeme() << endl;
+    		cout << "Token: " << it->second->getToken() << endl;
+    		cout << "Posição: Linha " << it->second->getLineNumber() << ", Coluna " << it->second->getLinePos() << endl;
+
+    	}else
+    	if(it->second->getToken() == "NUMBER"){
+
+    	}
+
+    }
+
     return 0;
 }

@@ -9,6 +9,7 @@ LexicalAnalyzer::LexicalAnalyzer(Buffer* charBuffer, vector<Token*>* tokenVector
 void LexicalAnalyzer::doTheThing(){
 
 	int state = 0;
+	int strPos;
 	char c;
 	string lexeme;
 
@@ -32,36 +33,42 @@ void LexicalAnalyzer::doTheThing(){
 					state = 4;
 				}else
 				if(c == '('){
-					TableEntry* tableEntry = new TableEntry("(","LBRACKET",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("(","LBRACKET",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("LBRACKET", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else
 				if(c == ')'){
-					TableEntry* tableEntry = new TableEntry(")","RBRACKET",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry(")","RBRACKET",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("RBRACKET", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else
 				if(c == '{'){
-					TableEntry* tableEntry = new TableEntry("{","LBRACE",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("{","LBRACE",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("LBRACE", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else
 				if(c == '}'){
-					TableEntry* tableEntry = new TableEntry("}","RBRACE",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("}","RBRACE",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("RBRACE", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else
 				if(c == ','){
-					TableEntry* tableEntry = new TableEntry(",","COMMA",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry(",","COMMA",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("COMMA", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else if(c == ';'){
-					TableEntry* tableEntry = new TableEntry(";","PCOMMA",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry(";","PCOMMA",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("PCOMMA", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
@@ -73,25 +80,29 @@ void LexicalAnalyzer::doTheThing(){
 					state = 6;
 				}else
 				if(c == '+'){
-					TableEntry* tableEntry = new TableEntry("+","PLUS",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("+","PLUS",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("PLUS", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else
 				if(c == '-'){
-					TableEntry* tableEntry = new TableEntry("-","MINUS",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("-","MINUS",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("MINUS", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else
 				if(c == '*'){
-					TableEntry* tableEntry = new TableEntry("*","TIMES",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("*","TIMES",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("TIMES", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else
 				if(c == '/'){
-					TableEntry* tableEntry = new TableEntry("/","DIV",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("/","DIV",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("DIV", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
@@ -109,12 +120,14 @@ void LexicalAnalyzer::doTheThing(){
 			case 1:
 				c = this->charBuffer->getNextChar();
 				if (c == '='){
-					TableEntry* tableEntry = new TableEntry("<=","LE",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos() - 1;
+					TableEntry* tableEntry = new TableEntry("<=","LE",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("LE", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else{
-					TableEntry* tableEntry = new TableEntry("<","LT",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("<","LT",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("LT", tableEntry);
 					this->tokenVector->push_back(token);
 					this->charBuffer->ungetChar();
@@ -125,12 +138,14 @@ void LexicalAnalyzer::doTheThing(){
 			case 2:
 				c = this->charBuffer->getNextChar();
 				if (c == '='){
-					TableEntry* tableEntry = new TableEntry(">=","GE",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos() - 1;
+					TableEntry* tableEntry = new TableEntry(">=","GE",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("GE", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else{
-					TableEntry* tableEntry = new TableEntry(">","GT",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry(">","GT",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("GT", tableEntry);
 					this->tokenVector->push_back(token);
 					this->charBuffer->ungetChar();
@@ -141,12 +156,14 @@ void LexicalAnalyzer::doTheThing(){
 			case 3:
 				c = this->charBuffer->getNextChar();
 				if (c == '='){
-					TableEntry* tableEntry = new TableEntry("==","EQUAL",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos() - 1;
+					TableEntry* tableEntry = new TableEntry("==","EQUAL",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("EQUAL", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
 				}else{
-					TableEntry* tableEntry = new TableEntry("=","ATTR",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos();
+					TableEntry* tableEntry = new TableEntry("=","ATTR",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("ATTR", tableEntry);
 					this->tokenVector->push_back(token);
 					this->charBuffer->ungetChar();
@@ -157,7 +174,8 @@ void LexicalAnalyzer::doTheThing(){
 			case 4:
 				c = this->charBuffer->getNextChar();
 				if (c == '='){
-					TableEntry* tableEntry = new TableEntry("!=","NE",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos() - 1;
+					TableEntry* tableEntry = new TableEntry("!=","NE",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("NE", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
@@ -170,7 +188,8 @@ void LexicalAnalyzer::doTheThing(){
 			case 5:
 				c = this->charBuffer->getNextChar();
 				if (c == '|'){
-					TableEntry* tableEntry = new TableEntry("||", "OR", this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos() - 1;
+					TableEntry* tableEntry = new TableEntry("||", "OR", this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("OR", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
@@ -183,7 +202,8 @@ void LexicalAnalyzer::doTheThing(){
 			case 6:
 				c = this->charBuffer->getNextChar();
 				if (c == '&'){
-					TableEntry* tableEntry = new TableEntry("&&","AND",this->charBuffer->getCurrentLine(),0);
+					strPos =  this->charBuffer->getCurrentPos() - 1;
+					TableEntry* tableEntry = new TableEntry("&&","AND",this->charBuffer->getCurrentLine(), strPos, 0);
 					Token* token = new Token("AND", tableEntry);
 					this->tokenVector->push_back(token);
 					state = 0;
@@ -201,49 +221,57 @@ void LexicalAnalyzer::doTheThing(){
 				}else{
 					this->charBuffer->ungetChar();
 					if(lexeme == "int"){
-						TableEntry* tableEntry = new TableEntry(lexeme,"INT",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - 2;
+						TableEntry* tableEntry = new TableEntry(lexeme,"INT",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("INT", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
 					}else if(lexeme == "float"){
-						TableEntry* tableEntry = new TableEntry(lexeme,"FLOAT",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - 4;
+						TableEntry* tableEntry = new TableEntry(lexeme,"FLOAT",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("FLOAT", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
 					}else if(lexeme == "if"){
-						TableEntry* tableEntry = new TableEntry(lexeme,"IF",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - 1;
+						TableEntry* tableEntry = new TableEntry(lexeme,"IF",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("IF", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
 					}else if(lexeme == "else"){
-						TableEntry* tableEntry = new TableEntry(lexeme,"ELSE",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - 3;
+						TableEntry* tableEntry = new TableEntry(lexeme,"ELSE",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("ELSE", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
 					}else if(lexeme == "while"){
-						TableEntry* tableEntry = new TableEntry(lexeme,"WHILE",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - 4;
+						TableEntry* tableEntry = new TableEntry(lexeme,"WHILE",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("WHILE", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
 					}else if(lexeme == "read"){
-						TableEntry* tableEntry = new TableEntry(lexeme,"READ",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - 3;
+						TableEntry* tableEntry = new TableEntry(lexeme,"READ",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("READ", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
 					}else if(lexeme == "print"){
-						TableEntry* tableEntry = new TableEntry(lexeme,"PRINT",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - 4;
+						TableEntry* tableEntry = new TableEntry(lexeme,"PRINT",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("PRINT", tableEntry);
 						this->tokenVector->push_back(token);
 						lexeme.clear();
 					}else {
-						TableEntry* tableEntry = new TableEntry(lexeme,"ID",this->charBuffer->getCurrentLine(),0);
+						strPos =  this->charBuffer->getCurrentPos() - lexeme.size();
+						TableEntry* tableEntry = new TableEntry(lexeme,"ID",this->charBuffer->getCurrentLine(), strPos, 0);
 						// VERIFICAR O MÉTODO CERTO
 						Token* token = new Token("ID", tableEntry);
 						this->tokenVector->push_back(token);
@@ -262,11 +290,14 @@ void LexicalAnalyzer::doTheThing(){
 				}else if (c == '.'){
 					lexeme.push_back(c);
 					state = 9;
-				}else{
+				}else{					
 					float stringvalue;
 					stringstream str(lexeme);
 					str >> stringvalue;
-					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER",this->charBuffer->getCurrentLine(),stringvalue);
+
+					strPos =  this->charBuffer->getCurrentPos() - lexeme.size();
+
+					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER",this->charBuffer->getCurrentLine(), strPos, stringvalue);
 					Token* token = new Token("NUMBER", tableEntry);
 					this->tokenVector->push_back(token);
 					this->symbolTable->insertEntry(tableEntry);
@@ -282,10 +313,11 @@ void LexicalAnalyzer::doTheThing(){
 					lexeme.push_back(c);
 					state = 9;
 				}else{
+					strPos =  this->charBuffer->getCurrentPos() - lexeme.size();
 					float stringvalue;
 					stringstream str(lexeme);
 					str >> stringvalue;
-					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER",this->charBuffer->getCurrentLine(),stringvalue);
+					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER",this->charBuffer->getCurrentLine(), strPos, stringvalue);
 					Token* token = new Token("NUMBER", tableEntry);
 					this->tokenVector->push_back(token);
 					this->symbolTable->insertEntry(tableEntry);

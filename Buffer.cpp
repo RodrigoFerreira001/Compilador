@@ -63,8 +63,11 @@ char Buffer::getNextChar() {
 }
 
 void Buffer::ungetChar(){
-	if((*(this->bI)) > 0)
+	if((*(this->bI)) > 0){
 		(*(this->bI))--;
+		(*(this->currentPos))--;
+	}
+
 }
 
 bool Buffer::eob(){
