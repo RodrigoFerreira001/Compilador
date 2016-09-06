@@ -13,6 +13,5 @@ int main(int argc, char **argv){
     LexicalAnalyzer* Zhuli = new LexicalAnalyzer(buffer, tokenVector, symbolTable);
     //Zhuuuuu-li, Doooo the Thiing!!
     Zhuli->doTheThing();
-
     return 0;
 }
