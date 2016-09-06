@@ -9,103 +9,103 @@ SymbolTable::SymbolTable(){
     this->hashMap->insert(pair<string, TableEntry*> ("int", lInt));
 
     TableEntry* lFloat = new TableEntry;
-    lInt->setToken("FLOAT");
+    lFloat->setToken("FLOAT");
     this->hashMap->insert(pair<string, TableEntry*> ("float", lFloat));
 
     TableEntry* lIf = new TableEntry;
-    lInt->setToken("IF");
+    lIf->setToken("IF");
     this->hashMap->insert(pair<string, TableEntry*> ("if", lIf));
 
     TableEntry* lElse = new TableEntry;
-    lInt->setToken("ELSE");
+    lElse->setToken("ELSE");
     this->hashMap->insert(pair<string, TableEntry*> ("else", lElse));
 
     TableEntry* lWhile = new TableEntry;
-    lInt->setToken("WHILE");
+    lWhile->setToken("WHILE");
     this->hashMap->insert(pair<string, TableEntry*> ("while", lWhile));
 
     TableEntry* lLbracket = new TableEntry;
-    lInt->setToken("LBRACKET");
+    lLbracket->setToken("LBRACKET");
     this->hashMap->insert(pair<string, TableEntry*> ("(", lLbracket));
 
     TableEntry* lRbracket = new TableEntry;
-    lInt->setToken("RBRACKET");
+    lRbracket->setToken("RBRACKET");
     this->hashMap->insert(pair<string, TableEntry*> (")", lRbracket));
 
     TableEntry* lLbrace = new TableEntry;
-    lInt->setToken("LBRACE");
+    lLbrace->setToken("LBRACE");
     this->hashMap->insert(pair<string, TableEntry*> ("{", lLbrace));
 
     TableEntry* lRbrace = new TableEntry;
-    lInt->setToken("RBRACE");
+    lRbrace->setToken("RBRACE");
     this->hashMap->insert(pair<string, TableEntry*> ("}", lRbrace));
 
     TableEntry* lComma = new TableEntry;
-    lInt->setToken("COMMA");
+    lComma->setToken("COMMA");
     this->hashMap->insert(pair<string, TableEntry*> (",", lComma));
 
     TableEntry* lPcomma = new TableEntry;
-    lInt->setToken("PCOMMA");
+    lPcomma->setToken("PCOMMA");
     this->hashMap->insert(pair<string, TableEntry*> (";", lPcomma));
 
     TableEntry* lAttr = new TableEntry;
-    lInt->setToken("ATTR");
+    lAttr->setToken("ATTR");
     this->hashMap->insert(pair<string, TableEntry*> ("=", lAttr));
 
     TableEntry* lEqual = new TableEntry;
-    lInt->setToken("EQUAL");
+    lEqual->setToken("EQUAL");
     this->hashMap->insert(pair<string, TableEntry*> ("==", lEqual));
 
     TableEntry* lLt = new TableEntry;
-    lInt->setToken("LT");
+    lLt->setToken("LT");
     this->hashMap->insert(pair<string, TableEntry*> ("<", lLt));
 
     TableEntry* lLe = new TableEntry;
-    lInt->setToken("LE");
+    lLe->setToken("LE");
     this->hashMap->insert(pair<string, TableEntry*> ("<=", lLe));
 
     TableEntry* lGt = new TableEntry;
-    lInt->setToken("GT");
+    lGt->setToken("GT");
     this->hashMap->insert(pair<string, TableEntry*> (">", lGt));
 
     TableEntry* lGe = new TableEntry;
-    lInt->setToken("GE");
+    lGe->setToken("GE");
     this->hashMap->insert(pair<string, TableEntry*> (">=", lGe));
 
     TableEntry* lNe = new TableEntry;
-    lInt->setToken("NE");
+    lNe->setToken("NE");
     this->hashMap->insert(pair<string, TableEntry*> ("!=", lNe));
 
     TableEntry* lOr = new TableEntry;
-    lInt->setToken("OR");
+    lOr->setToken("OR");
     this->hashMap->insert(pair<string, TableEntry*> ("||", lOr));
 
     TableEntry* lAnd = new TableEntry;
-    lInt->setToken("AND");
+    lAnd->setToken("AND");
     this->hashMap->insert(pair<string, TableEntry*> ("&&", lAnd));
 
     TableEntry* lPlus = new TableEntry;
-    lInt->setToken("PLUS");
+    lPlus->setToken("PLUS");
     this->hashMap->insert(pair<string, TableEntry*> ("+", lPlus));
 
     TableEntry* lMinus = new TableEntry;
-    lInt->setToken("MINUS");
+    lMinus->setToken("MINUS");
     this->hashMap->insert(pair<string, TableEntry*> ("-", lMinus));
 
     TableEntry* lTimes = new TableEntry;
-    lInt->setToken("TIMES");
+    lTimes->setToken("TIMES");
     this->hashMap->insert(pair<string, TableEntry*> ("*", lTimes));
 
     TableEntry* lDiv = new TableEntry;
-    lInt->setToken("DIV");
+    lDiv->setToken("DIV");
     this->hashMap->insert(pair<string, TableEntry*> ("/", lDiv));
 
     TableEntry* lRead = new TableEntry;
-    lInt->setToken("READ");
+    lRead->setToken("READ");
     this->hashMap->insert(pair<string, TableEntry*> ("read", lRead));
 
     TableEntry* lPrint = new TableEntry;
-    lInt->setToken("PRINT");
+    lPrint->setToken("PRINT");
     this->hashMap->insert(pair<string, TableEntry*> ("print", lPrint));
 }
 
