@@ -114,6 +114,9 @@ void LexicalAnalyzer::doTheThing(){
 				if(c >= '0' && c <= '9'){
 					state = 8;
 					lexeme.push_back(c);
+				}else{
+					cout <<" ERROR : character " << c <<" not expected on line " << this->charBuffer->getCurrentLine() << endl;
+					exit(EXIT_FAILURE);
 				}
 				break;
 
@@ -290,7 +293,7 @@ void LexicalAnalyzer::doTheThing(){
 				}else if (c == '.'){
 					lexeme.push_back(c);
 					state = 9;
-				}else{					
+				}else{
 					float stringvalue;
 					stringstream str(lexeme);
 					str >> stringvalue;
