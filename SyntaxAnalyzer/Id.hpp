@@ -1,3 +1,4 @@
+#pragma once
 #include "Expr.hpp"
 #include "../LexicalAnalyzer/TableEntry.hpp"
 #include "Temp.hpp"

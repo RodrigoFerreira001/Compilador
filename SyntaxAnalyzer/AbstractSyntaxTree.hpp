@@ -1,3 +1,4 @@
+#pragma once
 #include "Declaration.hpp"
 #include "Command.hpp"
 #include "And.hpp"
