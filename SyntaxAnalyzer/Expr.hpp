@@ -24,4 +24,4 @@ public:
 
 	void set_b_value(bool b_value);
 	bool get_b_value();
-}
+};

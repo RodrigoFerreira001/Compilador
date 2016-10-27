@@ -4,5 +4,5 @@
 class Plus : public Expr{
 public:
 	Plus();
-	~Plus()
+	~Plus();
 };

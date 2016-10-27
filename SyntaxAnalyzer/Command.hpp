@@ -9,6 +9,5 @@ private:
 public:
 	Command();
 	~Command();
-	void append_child(Command* c);
 	vector<Command*>* get_children();
 };

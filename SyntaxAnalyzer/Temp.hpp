@@ -4,7 +4,7 @@ using namespace std;
 
 class Temp{
 private:
-	static int name_id = 0;
+	static int name_id;
 	string* name;
 public:
 	Temp();

@@ -4,5 +4,5 @@
 class Ne : public Expr{
 public:
 	Ne();
-	~Ne()
+	~Ne();
 };

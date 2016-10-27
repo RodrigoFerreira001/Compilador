@@ -4,5 +4,5 @@
 class Div : public Expr{
 public:
 	Div();
-	~Div()
+	~Div();
 };

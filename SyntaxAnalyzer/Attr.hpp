@@ -5,4 +5,4 @@ class Attr : public Command{
 public:
 	Attr();
 	~Attr();
-}
+};

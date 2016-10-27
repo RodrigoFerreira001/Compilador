@@ -4,5 +4,5 @@
 class Gt : public Expr{
 public:
 	Gt();
-	~Gt()
+	~Gt();
 };

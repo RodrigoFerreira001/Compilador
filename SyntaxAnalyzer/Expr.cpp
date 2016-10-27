@@ -7,11 +7,11 @@ Expr::Expr(){
 	b_value = new bool;
 }
 
-Expr(int type, int i_value, float f_value, bool b_value){
-	type = new int;
-	i_value = new int;
-	f_value = new float;
-	b_value = new bool;
+Expr::Expr(int type, int i_value, float f_value, bool b_value){
+	this->type = new int;
+	this->i_value = new int;
+	this->f_value = new float;
+	this->b_value = new bool;
 
 	*(this->type) = type;
 	*(this->i_value) = i_value;

@@ -5,4 +5,4 @@ class If : public Command{
 public:
 	If();
 	~If();
-}
+};

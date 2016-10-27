@@ -5,4 +5,4 @@ class Read : public Command{
 public:
 	Read();
 	~Read();
-}
+};

@@ -8,7 +8,7 @@ private:
 	int* type;
 public:
 	Num(TableEntry* table_entry, int type);
-	~Num()
+	~Num();
 	TableEntry* get_table_entry();
 	int get_type();
 };

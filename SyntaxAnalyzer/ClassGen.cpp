@@ -16,7 +16,7 @@ int main(int argc, char **argv){
 	o_hpp << "class " + class_name + " : public " + class_ext + "{" << endl;
 	o_hpp << "public:" << endl;
 	o_hpp << "\t" + class_name + "();" << endl;
-	o_hpp << "\t~" + class_name + "()" << endl;
+	o_hpp << "\t~" + class_name + "();" << endl;
 	o_hpp << "};";
 
 	//Write cpp file

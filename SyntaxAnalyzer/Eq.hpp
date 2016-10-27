@@ -4,5 +4,5 @@
 class Eq : public Expr{
 public:
 	Eq();
-	~Eq()
+	~Eq();
 };

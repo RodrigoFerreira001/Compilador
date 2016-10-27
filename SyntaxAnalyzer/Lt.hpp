@@ -4,5 +4,5 @@
 class Lt : public Expr{
 public:
 	Lt();
-	~Lt()
+	~Lt();
 };

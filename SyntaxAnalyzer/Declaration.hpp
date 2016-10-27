@@ -9,7 +9,7 @@ private:
 	int* type;
 	Temp* temp;
 public:
-	Declaration();
+	Declaration(TableEntry* table_entry, bool is_var_decl, int type, Temp* temp);
 	~Declaration();
 	TableEntry* get_table_entry();
 	bool get_is_var_decl();

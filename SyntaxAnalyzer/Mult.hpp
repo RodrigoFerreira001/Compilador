@@ -4,5 +4,5 @@
 class Mult : public Expr{
 public:
 	Mult();
-	~Mult()
+	~Mult();
 };

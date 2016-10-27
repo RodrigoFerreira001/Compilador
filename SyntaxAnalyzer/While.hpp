@@ -5,4 +5,4 @@ class While : public Command{
 public:
 	While();
 	~While();
-}
+};

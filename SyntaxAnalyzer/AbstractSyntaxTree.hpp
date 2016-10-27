@@ -13,7 +13,7 @@
 #include "Lt.hpp"
 #include "Lte.hpp"
 #include "Minus.hpp"
-#include "Multi.hpp"
+#include "Mult.hpp"
 #include "Ne.hpp"
 #include "Num.hpp"
 #include "Or.hpp"
@@ -25,5 +25,12 @@
 
 class AbstractSyntaxTree{
 private:
+	vector<Declaration>* declarations;
+	vector<Command>* commands;
 
+public:
+	AbstractSyntaxTree();
+	~AbstractSyntaxTree();
+	vector<Declaration>* get_declarations();
+	vector<Command>* get_commands();
 };

@@ -11,8 +11,8 @@ private:
 	int* type;
 	Temp* temp;
 public:
-	Id();
-	~Id()
+	Id(TableEntry* table_entry, bool is_l_value, bool is_var_decl, int type, Temp* temp);
+	~Id();
 	TableEntry* get_table_entry();
 	bool get_is_l_value();
 	bool get_is_var_decl();

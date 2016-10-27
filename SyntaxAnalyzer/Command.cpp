@@ -8,10 +8,6 @@ Command::~Command(){
 	delete children;
 }
 
-Command::append_child(Command *c){
-	children->push_back(c);
-}
-
 vector<Command*>* Command::get_children(){
 	return children;
 }
