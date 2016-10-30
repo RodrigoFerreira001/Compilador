@@ -1,5 +1,6 @@
 #pragma once
 #include "Command.hpp"
+#include "Id.hpp"
 
 class While : public Command{
 public:
