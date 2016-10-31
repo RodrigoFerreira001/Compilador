@@ -1,5 +1,6 @@
 #pragma once
 #include "Expr.hpp"
+#include "Id.hpp"
 
 class Gt : public Expr{
 public:
@@ -11,5 +12,5 @@ public:
 
 private:
 	Expr* e1;
-	Expr* e2;	
+	Expr* e2;
 };

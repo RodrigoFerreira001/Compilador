@@ -1,5 +1,7 @@
 #pragma once
 #include "Expr.hpp"
+#include "Id.hpp"
+
 class Or : public Expr{
 public:
 	Or();

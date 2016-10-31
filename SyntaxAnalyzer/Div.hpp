@@ -1,5 +1,6 @@
 #pragma once
 #include "Expr.hpp"
+#include "Id.hpp"
 
 class Div : public Expr{
 public:
