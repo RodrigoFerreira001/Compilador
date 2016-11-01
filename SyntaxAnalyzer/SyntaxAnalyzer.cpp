@@ -1,7 +1,11 @@
 #include "SyntaxAnalyzer.hpp"
 
 void SyntaxAnalyzer::print_syntactic_error(Token token){
-
+	if(token.getToken() == "ID" || token.getNome() == "NUMBER"){
+		printf(“%s esperado na linha %d”, token.getNome(), token.getNumLinha());
+	}else{
+		printf(“%s esperado na linha %d”, token.getLexema(), token.getNumLinha());
+	}
 }
 
 bool SyntaxAnalyzer::match(Token token, int index, vector<Token*>* token_vector){
@@ -13,42 +17,6 @@ vector<Declaration> SyntaxAnalyzer::declarations_list(vector<Token*>* token_vect
 }
 
 int SyntaxAnalyzer::type(vector<Token*>* token_vector, int index){
-
-}
-
-vector<Declaration> SyntaxAnalyzer::declarations_list2(vector<Token*>* token_vector, int index, int currentType){
-
-}
-
-vector<Comannd> SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::expression(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::and(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::equal(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::relation(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::plus(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::term(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::factor(vector<Token*>* token_vector, int index){
 
 }
 

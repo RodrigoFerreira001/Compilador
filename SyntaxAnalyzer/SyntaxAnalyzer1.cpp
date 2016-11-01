@@ -1,20 +1,5 @@
 #include "SyntaxAnalyzer.hpp"
 
-void SyntaxAnalyzer::print_syntactic_error(Token token){
-
-}
-
-bool SyntaxAnalyzer::match(Token token, int index, vector<Token*>* token_vector){
-
-}
-
-vector<Declaration> SyntaxAnalyzer::declarations_list(vector<Token*>* token_vector, int index){
-
-}
-
-int SyntaxAnalyzer::type(vector<Token*>* token_vector, int index){
-
-}
 
 vector<Declaration> SyntaxAnalyzer::declarations_list2(vector<Token*>* token_vector, int index, int currentType){
 
@@ -36,21 +21,6 @@ Expr SyntaxAnalyzer::equal(vector<Token*>* token_vector, int index){
 
 }
 
-Expr SyntaxAnalyzer::relation(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::plus(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::term(vector<Token*>* token_vector, int index){
-
-}
-
-Expr SyntaxAnalyzer::factor(vector<Token*>* token_vector, int index){
-
-}
 
 SyntaxAnalyzer::SyntaxAnalyzer(AbstractSyntaxTree* ast, vector<Token*>* token_vector){
 	this->ast = ast;
