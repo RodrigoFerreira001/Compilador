@@ -7,6 +7,7 @@ class TableEntry{
 private:
     string* lexeme;
     string* token;
+	//TEMP
     int* lineNumber;
     int* linePos;
     float* value;
