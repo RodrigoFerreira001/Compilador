@@ -49,6 +49,26 @@ Expr SyntaxAnalyzer::term(vector<Token*>* token_vector, int index){
 }
 
 Expr SyntaxAnalyzer::factor(vector<Token*>* token_vector, int index){
+	//TODO OLHAR DECLARAÇÕES
+	if(token_vector->at(index)->getToken() == "ID"){
+		//Id id = new Id(token_vector->at(index)->getTableEntry(),);
+			match(token_vector->at(index), index, token_vector);
+			return id;
+	}else{
+		if(token_vector->at(index)->getToken() == "NUMBER"){
+			//Number num = new Number(token_vector->at(index)->getTableEntry(),);
+				match(token_vector->at(index), index, token_vector);
+				return num;
+		}else{
+			if(token_vector->at(index)->getToken() == "LBRACKET"){
+					match(token_vector->at(index), index, token_vector);
+				//Expr e = new Expr()
+					return e;
+			}else{
+				printf("Erro! Identificador, número ou abre parênteses esperado na linha ...");
+			}
+		}
+	}
 
 }
 
