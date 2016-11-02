@@ -8,6 +8,8 @@ TableEntry::TableEntry(){
     this->linePos = new int;
     this->value = new float;
     this->next = NULL;
+	this->type = new int;
+	this->is_var_decl = new bool;
 }
 
 //Construtor padrão
@@ -18,6 +20,8 @@ TableEntry::TableEntry(string lexeme, string token, int lineNumber, int linePos,
     this->linePos = new int;
     this->value = new float;
     this->next = NULL;
+	this->type = new int;
+	this->is_var_decl = new bool;
 
     *(this->lexeme) = lexeme;
     *(this->token) = token;
@@ -88,4 +92,28 @@ void TableEntry::setNextEntry(TableEntry* entry){
 
 TableEntry* TableEntry::getNextEntry() const{
     return this->next;
+}
+
+void TableEntry::set_type(int type){
+	*(this->type) = type;
+}
+
+int TableEntry::get_type(){
+	return *(this->type);
+}
+
+void TableEntry::set_var_decl(bool is_var_decl){
+	*(this->is_var_decl) = is_var_decl;
+}
+
+bool TableEntry::get_var_decl(){
+	return *(this->is_var_decl);
+}
+
+void TableEntry::set_temp(Temp* temp){
+	this->temp = temp;
+}
+
+string TableEntry::get_temp(){
+	return temp->get_name();
 }

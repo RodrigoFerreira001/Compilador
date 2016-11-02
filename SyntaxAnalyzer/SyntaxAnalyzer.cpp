@@ -23,40 +23,49 @@ bool SyntaxAnalyzer::match(Token* token, int& index, vector<Token*>* token_vecto
 	}
 }
 
-vector<Declaration> SyntaxAnalyzer::declarations_list(vector<Token*>* token_vector, int index){
-	int currentType = -1;
-    if(w[i] == INT || w[i] == FLOAT)
-    {
-        List<Declaracao> declList = new ArrayList();
-        currentType = Tipo(); ///0 = INT, 1 = FLOAT
-        if(w[i] == ID)
-        {
-            w[i].getEntry().setType(currentType);
-            w[i].getEntry().setIsVarDecl(true);
-            /**
-            A classe Temp gera um novo temporário a cada instanciação. O número de temporários é ilimitado.
-            Um temporário é uma abstração para um registrador ou para uma posição de memória.
-            */
-            Temp temp = new Temp();///o nome do novo temporário é definido no construtor
-            Declaracao id = new Declaracao(w[i].getEntry(),temp);
-            w[i].getEntry().setTemp(temp);
-            declList.add(id);
-            match(ID);
-        }
-        else
-        {
-            imprimeErro(ID);
-            sincroniza(ID);
-        }
-        List<Declaracao> declList2 = Decl2(currentType);
-        declList.add(declList2);
-        return declList;
-    }
-    else return nullptr; ///else não faz nada Declaracoes -> e
+vector<Declaration*>* SyntaxAnalyzer::declarations_list(vector<Token*>* token_vector, int& index){
+	int current_type = -1;
+
+	if(token_vector->at(i)->getToken() == "INT" ||  token_vector->at(i)->getToken() == "FLOAT"){
+		vector<Declaration*>* decl_list = new vector<Declaration*>;
+		current_type = type(token_vector, index);
+
+		if(token_vector->at(i)->getToken() == "INT"){
+			token_vector->at(i)->getTableEntry()->set_type(current_type);
+			token_vector->at(i)->getTableEntry()->set_var_decl(true);
+
+			Temp* temp = new Temp();
+			Declaration* id = new Declaration(token_vector->at(i)->getTableEntry(), true, current_type, temp);
+			token_vector->at(i)->getTableEntry()->set_temp(temp);
+			decl_list->push_back(id);
+			match(token_vector->at(i), index, token_vector);
+		}else{
+			print_syntactic_error(token_vector->at(i));
+			synchronize(token_vector->at(i), index, int token_vector);
+		}
+
+		vector<Declaration*>* decl_list2 = declarations_list2(token_vector, index, current_type);
+		decl_list->push_back(decl_list2);
+		return decl_list;
+
+	}else{
+		return nullptr;
+	}
 }
 
-int SyntaxAnalyzer::type(vector<Token*>* token_vector, int index){
+int SyntaxAnalyzer::type(vector<Token*>* token_vector, int& index){
+	int current_type = -1;
 
+	if(token_vector->at(i)->getToken() == "INT"){
+		current_type = 0;
+		match(token_vector->at(i), index, token_vector);
+	}else
+	if(token_vector->at(i)->getToken() == "FLOAT"){
+		current_type = 1;
+		match(token_vector->at(i), index, token_vector);
+	}
+
+	return current_type;
 }
 
 SyntaxAnalyzer::SyntaxAnalyzer(AbstractSyntaxTree* ast, vector<Token*>* token_vector){
