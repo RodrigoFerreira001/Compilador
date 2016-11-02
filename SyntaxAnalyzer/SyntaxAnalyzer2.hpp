@@ -7,11 +7,11 @@ class SyntaxAnalyzer{
 private:
 	AbstractSyntaxTree* ast;
 	vector<Token*>* token_vector;
-	
-	Expr relation(vector<Token*>* token_vector, int index);
-	Expr plus(vector<Token*>* token_vector, int index);
-	Expr term(vector<Token*>* token_vector, int index);
-	Expr factor(vector<Token*>* token_vector, int index);
+
+	Expr relation(vector<Token*>* token_vector, int& index);
+	Expr plus(vector<Token*>* token_vector, int& index);
+	Expr term(vector<Token*>* token_vector, int& index);
+	Expr factor(vector<Token*>* token_vector, int& index);
 
 public:
 	SyntaxAnalyzer(AbstractSyntaxTree* ast, vector<Token*>* token_vector);
