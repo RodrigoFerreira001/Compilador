@@ -24,7 +24,8 @@ bool SyntaxAnalyzer::match(Token* token, int& index, vector<Token*>* token_vecto
 }
 
 vector<Declaration> SyntaxAnalyzer::declarations_list(vector<Token*>* token_vector, int index){
-	int currentType = -1;
+	int current_type = -1;
+	if(token_vector->)
     if(w[i] == INT || w[i] == FLOAT)
     {
         List<Declaracao> declList = new ArrayList();
