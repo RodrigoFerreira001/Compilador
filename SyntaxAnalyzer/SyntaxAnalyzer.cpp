@@ -38,10 +38,10 @@ vector<Declaration*>* SyntaxAnalyzer::declarations_list(vector<Token*>* token_ve
 			Declaration* id = new Declaration(token_vector->at(i)->getTableEntry(), true, current_type, temp);
 			token_vector->at(i)->getTableEntry()->set_temp(temp);
 			decl_list->push_back(id);
-			match(token_vector->at(i), index, token_vector);
+			match(Token("ID",nullptr), index, token_vector);
 		}else{
-			print_syntactic_error(token_vector->at(i));
-			synchronize(token_vector->at(i), index, int token_vector);
+			print_syntactic_error(Token("ID", nullptr));
+			synchronize(Token("ID", nullptr), index, int token_vector);
 		}
 
 		vector<Declaration*>* decl_list2 = declarations_list2(token_vector, index, current_type);
@@ -74,5 +74,26 @@ SyntaxAnalyzer::SyntaxAnalyzer(AbstractSyntaxTree* ast, vector<Token*>* token_ve
 }
 
 void SyntaxAnalyzer::faz_o_urro(){
+	//(flagErro variavel global ou um atributo da classe AnalisadorSintatico)
+    int flagErro = 0;
 
+    match(LBRACE);
+    List<Declaracao> listaDeclaracoes = Declaracoes();
+    prog = new Programa();
+    prog.adicionaNosFilhos(listaDeclaracoes);
+
+    List<Comando> listComandos = Comandos();
+    prog.adicionaNosFilhos(listComandos);
+    while (w[i] == PCOMMA || w[i] == LBRACE || w[i] == ID || w[i] == IF || w[i] == WHILE || w[i] == READ || w[i] == PRINT){
+        listComandos = Comandos();
+        prog.adicionaNosFilhos(listComandos);///Percorre a lista adicionando todo objeto Comando como um novo nó flho de prog
+    }
+    match(RBRACE);
+
+    if(flagErro) {
+	print("Foram encontrados erros sintáticos no código. A compilação não pode continuar.");
+	exit(1);
+    }
+    else print("Análise sintática realizada com sucesso. Nenhum erro foi encontrado. ");
+    return prog;
 }
