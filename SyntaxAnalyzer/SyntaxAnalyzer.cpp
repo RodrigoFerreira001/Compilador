@@ -18,6 +18,7 @@ bool SyntaxAnalyzer::match(Token* token, int& index, vector<Token*>* token_vecto
 	if(token_vector->at(index).getToken() == token->getToken()){
 		i++;
 	}else{
+		*has_error = true;
 		print_syntactic_error(token);
 		return synchronize();
 	}
@@ -71,29 +72,38 @@ int SyntaxAnalyzer::type(vector<Token*>* token_vector, int& index){
 SyntaxAnalyzer::SyntaxAnalyzer(AbstractSyntaxTree* ast, vector<Token*>* token_vector){
 	this->ast = ast;
 	this->token_vector = token_vector;
+	has_error = new bool(false);
 }
 
 void SyntaxAnalyzer::faz_o_urro(){
 	//(flagErro variavel global ou um atributo da classe AnalisadorSintatico)
-    int flagErro = 0;
+    *has_error = false;
+	int index = 0;
 
-    match(LBRACE);
-    List<Declaracao> listaDeclaracoes = Declaracoes();
-    prog = new Programa();
-    prog.adicionaNosFilhos(listaDeclaracoes);
+	match(Token("LBRACE",nullptr), &index, token_vector);
 
-    List<Comando> listComandos = Comandos();
-    prog.adicionaNosFilhos(listComandos);
-    while (w[i] == PCOMMA || w[i] == LBRACE || w[i] == ID || w[i] == IF || w[i] == WHILE || w[i] == READ || w[i] == PRINT){
-        listComandos = Comandos();
-        prog.adicionaNosFilhos(listComandos);///Percorre a lista adicionando todo objeto Comando como um novo nó flho de prog
-    }
-    match(RBRACE);
+	vector<Declaration*>* decl_list = declarations_list(token_vector, &index);
+	faz_o_urro();
+	ast->get_declarations()->push_back(decl_list);
 
-    if(flagErro) {
-	print("Foram encontrados erros sintáticos no código. A compilação não pode continuar.");
-	exit(1);
-    }
-    else print("Análise sintática realizada com sucesso. Nenhum erro foi encontrado. ");
-    return prog;
+	vector<Command*>* comm_list = commands_list(token_vector, &index);
+
+	ast->get_commands()->push_back(comm_list);
+
+    string tk = token_vector->at(i)->getToken();
+	while(tk == "PCOMMA" || tk == "LBRACE" || tk == "ID" || tk == "IF" || tk == "WHILE" || tk == "READ" || tk == "PRINT"){
+		comm_list = commands_list(token_vector, &index);
+		ast->get_commands()->push_back(comm_list);
+		tk = token_vector->at(i)->getToken();
+	}
+
+    match(Token("RBRACE",nullptr), &index, token_vector);
+
+	if(*has_erro){
+		cout << "Foram encontrados erros sintáticos no código. A compilação não pode continuar." << endl;
+		exit(1);
+	}else{
+		cout << "Análise sintática realizada com sucesso. Nenhum erro foi encontrado." << endl;
+		return;
+	}
 }

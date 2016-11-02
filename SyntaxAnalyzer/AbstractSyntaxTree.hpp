@@ -31,8 +31,8 @@ private:
 public:
 	AbstractSyntaxTree();
 	~AbstractSyntaxTree();
-	void set_declarations(vector<Declaration>* declarations);
-	void set_commands(vector<Command>* commands);
+	void set_declarations(vector<Declaration*>* declarations);
+	void set_commands(vector<Command*>* commands);
 	vector<Declaration>* get_declarations();
 	vector<Command>* get_commands();
 };

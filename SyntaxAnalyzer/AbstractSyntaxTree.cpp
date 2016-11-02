@@ -10,11 +10,11 @@ AbstractSyntaxTree::~AbstractSyntaxTree(){
 	delete commands;
 }
 
-void AbstractSyntaxTree::set_declarations(vector<Declaration>* declarations){
+void AbstractSyntaxTree::set_declarations(vector<Declaration*>* declarations){
 	*(this->declarations) = declarations;
 }
 
-void AbstractSyntaxTree::set_commands(vector<Command>* commands){
+void AbstractSyntaxTree::set_commands(vector<Command*>* commands){
 	*(this->commands) = commands;
 }
 
