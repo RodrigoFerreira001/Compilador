@@ -5,6 +5,7 @@
 class Print : public Command{
 public:
 	Print();
+	Print(Expr* e);
 	~Print();
 	Expr* get_expr();
 

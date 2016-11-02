@@ -5,8 +5,8 @@ Attr::Attr(){
 }
 
 Attr::Attr(Id* id, Expr* e){
-	this id = id;
-	this e = e;
+	this->id = id;
+	this->e = e;
 }
 
 Attr::~Attr(){
