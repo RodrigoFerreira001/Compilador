@@ -37,32 +37,93 @@ Expr SyntaxAnalyzer::equal(vector<Token*>* token_vector, int index){
 }
 
 Expr SyntaxAnalyzer::relation(vector<Token*>* token_vector, int index){
+	Expr* e1 = plus();
+	if(token_vector->at(index)->getToken() == "LT"){
+			match(token_vector->at(index), index, token_vector);
+			Expr* e2 = plus();
+			//Lt* lt = new Lt(e1,e2);
+			return lt;
+	}else{
+		if(token_vector->at(index)->getToken() == "GT"){
+				match(token_vector->at(index), index, token_vector);
+				Expr* e2 = plus();
+				//Gt* gt = new Gt(e1,e2);
+				return gt;
+		}else{
+			if(token_vector->at(index)->getToken() == "LTE"){
+					match(token_vector->at(index), index, token_vector);
+					Expr* e2 = plus();
+					//Lte* le = new Lte(e1,e2);
+					return lt;
+			}else{
+				if(token_vector->at(index)->getToken() == "GTE"){
+						match(token_vector->at(index), index, token_vector);
+						Expr* e2 = plus();
+						//Gte* ge = new Gte(e1,e2);
+						return ge;
+				}
+			}
+		}
+	}
 
+	return e1;
 }
 
 Expr SyntaxAnalyzer::plus(vector<Token*>* token_vector, int index){
-
+	Expr* e1 = term();
+	if(token_vector->at(index)->getToken() == "PLUS"){
+			match(token_vector->at(index), index, token_vector);
+			Expr* e2 = term();
+			//Plus* a = new Plus(e1,e2);
+			return a;
+	}else{
+		if(token_vector->at(index)->getToken() == "MINUS"){
+				match(token_vector->at(index), index, token_vector);
+				Expr* e2 = term();
+				//Minus* m = new Minus(e1,e2);
+				return m;
+		}
+	}
+	return e1;
 }
 
 Expr SyntaxAnalyzer::term(vector<Token*>* token_vector, int index){
-
+	Expr* e1 = factor();
+	if(token_vector->at(index)->getToken() == "TIMES"){
+			match(token_vector->at(index), index, token_vector);
+			Expr e2 = fator();
+			//Mult mu = new Mult(e1,e2);
+			return mu;
+	}else{
+		if(oken_vector->at(index)->getToken() == "DIV"){
+				match(token_vector->at(index), index, token_vector);
+				Expr* e2 = fator();
+				//Div* d = new Div(e1,e2);
+				return d;
+		}
+	}
+	return e1;
 }
 
 Expr SyntaxAnalyzer::factor(vector<Token*>* token_vector, int index){
-	//TODO OLHAR DECLARAÇÕES
+	int current_type = -1;
+
 	if(token_vector->at(index)->getToken() == "ID"){
-		//Id id = new Id(token_vector->at(index)->getTableEntry(),);
+			Temp* temp = new Temp();
+			//Id* id = new Id(token_vector->at(index)->getTableEntry(),);
 			match(token_vector->at(index), index, token_vector);
 			return id;
 	}else{
 		if(token_vector->at(index)->getToken() == "NUMBER"){
-			//Number num = new Number(token_vector->at(index)->getTableEntry(),);
+			//Number* num = new Number(token_vector->at(index)->getTableEntry(),);
 				match(token_vector->at(index), index, token_vector);
 				return num;
 		}else{
 			if(token_vector->at(index)->getToken() == "LBRACKET"){
 					match(token_vector->at(index), index, token_vector);
-				//Expr e = new Expr()
+					current_type = type(token_vector, index);
+					//Expr* e = new Expr(current_type, token_vector->at(i)->getTableEntry(), true , temp);
+					match(token_vector->at(index), index, token_vector);
 					return e;
 			}else{
 				printf("Erro! Identificador, número ou abre parênteses esperado na linha ...");
