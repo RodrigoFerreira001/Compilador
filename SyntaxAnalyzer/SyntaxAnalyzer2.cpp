@@ -1,6 +1,6 @@
 #include "SyntaxAnalyzer.hpp"
 
-Expr SyntaxAnalyzer::relation(vector<Token*>* token_vector, int index){
+Expr SyntaxAnalyzer::relation(vector<Token*>* token_vector, int& index){
 	Expr* e1 = plus();
 	if(token_vector->at(index)->getToken() == "LT"){
 		match(Token("LT",nullptr), index, token_vector);
@@ -33,7 +33,7 @@ Expr SyntaxAnalyzer::relation(vector<Token*>* token_vector, int index){
 	return e1;
 }
 
-Expr SyntaxAnalyzer::plus(vector<Token*>* token_vector, int index){
+Expr SyntaxAnalyzer::plus(vector<Token*>* token_vector, int& index){
 	Expr* e1 = term();
 	if(token_vector->at(index)->getToken() == "PLUS"){
 		match(Token("PLUS",nullptr), index, token_vector);
@@ -51,7 +51,7 @@ Expr SyntaxAnalyzer::plus(vector<Token*>* token_vector, int index){
 	return e1;
 }
 
-Expr SyntaxAnalyzer::term(vector<Token*>* token_vector, int index){
+Expr SyntaxAnalyzer::term(vector<Token*>* token_vector, int& index){
 	Expr* e1 = factor();
 	if(token_vector->at(index)->getToken() == "TIMES"){
 		match(Token("TIMES",nullptr), index, token_vector);
@@ -69,7 +69,7 @@ Expr SyntaxAnalyzer::term(vector<Token*>* token_vector, int index){
 	return e1;
 }
 
-Expr SyntaxAnalyzer::factor(vector<Token*>* token_vector, int index){
+Expr SyntaxAnalyzer::factor(vector<Token*>* token_vector, int& index){
 	int current_type = -1;
 
 	if(token_vector->at(index)->getToken() == "ID"){
