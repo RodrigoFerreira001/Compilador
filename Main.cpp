@@ -1,6 +1,8 @@
-#include "SymbolTable.hpp"
-#include "LexicalAnalyzer.hpp"
-#include "Buffer.hpp"
+#include "LexicalAnalyzer/LexiSymbolTable.hpp"
+#include "LexicalAnalyzer/LexicalAnalyzer.hpp"
+#include "LexicalAnalyzer/Buffer.hpp"
+#include "SyntaxAnalyzer/AbstractSyntaxTree.hpp"
+#include "SyntaxAnalyzer/SyntaxAnalyzer.hpp"
 #include <iostream>
 using namespace std;
 
