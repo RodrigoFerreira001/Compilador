@@ -134,7 +134,7 @@ vector<Command> SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, int 
 		If if_ = new If();
 		match(Token("IF", nullptr), index, token_vector);
 		match(Token("LBRACKET", nullptr), index, token_vector);
-		Expr e = new Expr();
+		Expr* e = new Expr();
 		match(Token("RBRACKET", nullptr), index, token_vector);
 		vector<Command*>* c = Command();
 
@@ -155,7 +155,7 @@ vector<Command> SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, int 
 	if(token_vector->at(index)->getToken() == "WHILE"){
 		match(token_vector->at(index)->getToken(), index, token_vector);
 		match(Token("LBRACKET", nullptr), index, token_vector);
-		Expr e = Expr();
+		Expr* e = Expr();
 		match(Token("RBRACKET", nullptr), index, token_vector);
 		vector<Command*>* c = Command();
 		While w = new While(e, c);
@@ -177,7 +177,7 @@ vector<Command> SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, int 
 
 	if(token_vector->at(index)->getToken() == "PRINT"){
 		match(token_vector->at(index)->getToken(), index, token_vector);
-		Expr e = Expr();
+		Expr* e = Expr();
 		Print p = new Print(e);
 		match(Token("PCOMMA", nullptr), index, token_vector);
 		command_vector->push_back(p);
