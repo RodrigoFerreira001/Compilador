@@ -1,8 +1,8 @@
 printSyntacticError(token){
 	if(token.getNome() == “ID” || token.getNome() == “NUMBER”)
-		printf(“%s esperado na linha %d”, token.getNome(), token.getNumLinha()); 
+		printf(“%s esperado na linha %d”, token.getNome(), token.getNumLinha());
 	else{
-		printf(“%s esperado na linha %d”, token.getLexema(), token.getNumLinha()); 	
+		printf(“%s esperado na linha %d”, token.getLexema(), token.getNumLinha());
 	}
 }
 
@@ -18,7 +18,7 @@ bool match(int token, indice, )
         printSyntacticError(token);
 	flagErro = 1;
         bool recuperouDoErro = sincroniza(w[i],token);
-	return recuperouDoErro; 
+	return recuperouDoErro;
     }
 }
 
@@ -27,8 +27,8 @@ Programa prog;
 
 Programa Programa_()
 {
-    //(flagErro variavel global ou um atributo da classe AnalisadorSintatico) 
-    int flagErro = 0; 
+    //(flagErro variavel global ou um atributo da classe AnalisadorSintatico)
+    int flagErro = 0;
 
     match(LBRACE);
     List<Declaracao> listaDeclaracoes = Declaracoes();
@@ -45,7 +45,7 @@ Programa Programa_()
 
     if(flagErro) {
 	print("Foram encontrados erros sintáticos no código. A compilação não pode continuar.");
-	exit(1); 
+	exit(1);
     }
     else print("Análise sintática realizada com sucesso. Nenhum erro foi encontrado. ");
     return prog;
@@ -155,7 +155,7 @@ List<Comando> Comandos()
         Identificador id = new Identificador(w[i].getEntry());
         id.setIsLValue(true);
         match(ID);
-	match(ATTR);
+				match(ATTR);
         Attr attr = new Attr(id,Expressao());
         match(PCOMMA);
         listComandos.add(attr);
@@ -176,7 +176,7 @@ List<Comando> Comandos()
         }
         if(lc2.size() > 0)
         {
-            if_ = new IF(e,lc,lc2);            
+            if_ = new IF(e,lc,lc2);
         }
         else if_ = new IF(e,lc,nullptr);
         listComandos.add(if_);
