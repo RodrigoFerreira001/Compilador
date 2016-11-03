@@ -8,6 +8,7 @@ private:
 	bool* is_var_decl;
 	int* type;
 	Temp* temp;
+	
 public:
 	Declaration(TableEntry* table_entry, bool is_var_decl, int type, Temp* temp);
 	~Declaration();
