@@ -25,14 +25,14 @@
 
 class AbstractSyntaxTree{
 private:
-	vector<Declaration>* declarations;
-	vector<Command>* commands;
+	vector<Declaration*>* declarations;
+	vector<Command*>* commands;
 
 public:
 	AbstractSyntaxTree();
 	~AbstractSyntaxTree();
 	void set_declarations(vector<Declaration*>* declarations);
 	void set_commands(vector<Command*>* commands);
-	vector<Declaration>* get_declarations();
-	vector<Command>* get_commands();
+	vector<Declaration*>* get_declarations();
+	vector<Command*>* get_commands();
 };

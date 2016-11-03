@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "../SyntaxAnalyzer/TableEntry.hpp"
+#include "../SyntaxAnalyzer/Temp.hpp"
 using namespace std;
 
 class TableEntry{

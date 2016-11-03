@@ -1,8 +1,8 @@
 #include "AbstractSyntaxTree.hpp"
 
 AbstractSyntaxTree::AbstractSyntaxTree(){
-	declarations = new vector<Declaration>;
-	commands = new vector<Command>;
+	declarations = new vector<Declaration*>;
+	commands = new vector<Command*>;
 }
 
 AbstractSyntaxTree::~AbstractSyntaxTree(){
@@ -11,17 +11,17 @@ AbstractSyntaxTree::~AbstractSyntaxTree(){
 }
 
 void AbstractSyntaxTree::set_declarations(vector<Declaration*>* declarations){
-	*(this->declarations) = declarations;
+	this->declarations = declarations;
 }
 
 void AbstractSyntaxTree::set_commands(vector<Command*>* commands){
-	*(this->commands) = commands;
+	this->commands = commands;
 }
 
-vector<Declaration>* AbstractSyntaxTree::get_declarations(){
+vector<Declaration*>* AbstractSyntaxTree::get_declarations(){
 	return declarations;
 }
 
-vector<Command>* AbstractSyntaxTree::get_commands(){
+vector<Command*>* AbstractSyntaxTree::get_commands(){
 	return commands;
 }
