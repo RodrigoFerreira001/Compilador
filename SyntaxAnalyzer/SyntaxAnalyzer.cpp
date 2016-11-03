@@ -90,7 +90,7 @@ vector<Declaration*>* SyntaxAnalyzer::declarations_list2(vector<Token*>* token_v
 			synchronize(token_vector->at(index)->getToken(), index, token_vector);
 		}
 
-		vector<Declaration*>* = declarations_list2(token_vector, index, currentType);
+		vector<Declaration*>* decl_list2 = declarations_list2(token_vector, index, currentType);
 		decl_list->push_back(decl_list2);
 		return decl_list;
 	}else{
