@@ -56,5 +56,11 @@ int main(int argc, char **argv){
         cout << i << ": " << tokenVector->at(i)->getToken() << endl;
     }
 
+	cout << "Chamando analizador sintático" << endl;
+	int index = 0;
+	AbstractSyntaxTree ast;
+	SyntaxAnalyzer syntax_analyzer(&ast, tokenVector);
+	syntax_analyzer.faz_o_urro(index);
+
     return 0;
 }

@@ -1,19 +1,19 @@
 {
     float a;
     int i, inc, j;
-    a = 1.11;
+    a = 1.1;
     i = 0;
     inc = 2;
     read j;
 
-    while(i < j){
+    while(i < j)
+    {
         i = i + inc;
         a = a*i;
     }
-    if(a > 10.0){
+    if(a > 10.0)
+    {
         print 1;
-    }
-    if((inc == 0) || i < 30){
-        print 10;
+        a = 9;
     }
 }

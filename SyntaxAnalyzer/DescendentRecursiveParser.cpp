@@ -31,6 +31,7 @@ Programa Programa_()
     int flagErro = 0;
 
     match(LBRACE);
+
     List<Declaracao> listaDeclaracoes = Declaracoes();
     prog = new Programa();
     prog.adicionaNosFilhos(listaDeclaracoes);
@@ -140,6 +141,7 @@ List<Declaracao> Decl2(int currentType)
 List<Comando> Comandos()
 {
     List<Comando> listComandos = new ArrayList();
+
     if(w[i] == PCOMMA) match(PCOMMA);
     if(w[i] == LBRACE)
     {

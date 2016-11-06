@@ -29,4 +29,4 @@ g++ -std=c++11\
 	SyntaxAnalyzer/Num.cpp\
 	SyntaxAnalyzer/AbstractSyntaxTree.cpp\
 	SyntaxAnalyzer/SyntaxAnalyzer.cpp\
-	Main.cpp -o Main
+	Main.cpp -g -o Main
