@@ -8,9 +8,10 @@ private:
 	bool* is_var_decl;
 	int* type;
 	Temp* temp;
-	
+
 public:
 	Declaration(TableEntry* table_entry, bool is_var_decl, int type, Temp* temp);
+	Declaration(const Declaration& d);
 	~Declaration();
 	TableEntry* get_table_entry();
 	bool get_is_var_decl();

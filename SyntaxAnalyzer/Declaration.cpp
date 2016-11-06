@@ -7,6 +7,13 @@ Declaration::Declaration(TableEntry* table_entry, bool is_var_decl, int type, Te
 	this->temp = temp;
 }
 
+Declaration::Declaration(const Declaration& d){
+	this->table_entry = table_entry;
+	this->is_var_decl = new bool(*(d.is_var_decl));
+	this->type = new int(*(d.type));
+	this->temp = temp;
+}
+
 Declaration::~Declaration(){
 	delete is_var_decl;
 	delete type;

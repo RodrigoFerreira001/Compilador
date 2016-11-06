@@ -1,4 +1,4 @@
-#include "LexicalAnalyzer/LexiSymbolTable.hpp"
+#include "LexicalAnalyzer/SymbolTable.hpp"
 #include "LexicalAnalyzer/LexicalAnalyzer.hpp"
 #include "LexicalAnalyzer/Buffer.hpp"
 #include "SyntaxAnalyzer/AbstractSyntaxTree.hpp"
