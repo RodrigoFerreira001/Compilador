@@ -61,7 +61,7 @@ int main(int argc, char **argv){
 	AbstractSyntaxTree ast;
 	SyntaxAnalyzer syntax_analyzer(&ast, tokenVector);
 	syntax_analyzer.faz_o_urro(index);
-
+    /*
     for(int i = 0; i < ast.get_declarations()->size(); ++i){
         cout << "TOKEN DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_table_entry()->getToken() << endl;
         cout << "LEXEMA DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_table_entry()->getLexeme() << endl;
@@ -74,5 +74,7 @@ int main(int argc, char **argv){
         //cout << "LEXEMA DECLARAÇÃO: " << ast.get_commands()->at(i)->get_table_entry()->getLexeme() << endl;
         //cout << endl;
     }
+
+    */
     return 0;
 }
