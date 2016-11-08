@@ -85,6 +85,11 @@ int Buffer::getCurrentPos(){
 	return *(this->currentPos);
 }
 
+
+void Buffer::removeLine(){
+	(*(this->currentLine))--;
+}
+
 // ======================================================================
 // Private Methods
 void Buffer::reload() {

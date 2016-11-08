@@ -1,18 +1,65 @@
 #include "SyntaxAnalyzer.hpp"
 
-void SyntaxAnalyzer::print_syntactic_error(Token* token){
-	if(token->getToken() == "ID" || token->getToken() == "NUMBER"){
-		cout << token->getTableEntry()->getToken() << " esperado na linha " <<
-		token->getTableEntry()->getLineNumber() << endl;
+void SyntaxAnalyzer::faz_o_urro(int& index){
+	//(flagErro variavel global ou um atributo da classe AnalisadorSintatico)
+    *has_error = false;
+
+	match(new Token("LBRACE",token_vector->at(index)->getTableEntry()), index, token_vector);
+
+	vector<Declaration*>* decl_list = declarations_list(token_vector, index);
+	ast->set_declarations(decl_list);
+
+	vector<Command*>* comm_list = new vector<Command*>;
+
+    string tk = token_vector->at(index)->getToken();
+	while(((token_vector->size() - 1) > index) && tk == "PCOMMA" || tk == "LBRACE" || tk == "ID" || tk == "IF" || tk == "WHILE" || tk == "READ" || tk == "PRINT"){
+		comm_list = commands_list(token_vector, index);
+        for(int i = 0; i < comm_list->size(); ++i)
+		      ast->get_commands()->push_back(comm_list->at(i));
+		tk = token_vector->at(index)->getToken();
+	}
+
+    match(new Token("RBRACE",token_vector->at(index)->getTableEntry()), index, token_vector);
+
+	if(*has_error){
+		cout << "Foram encontrados erros sintáticos no código. A compilação não pode continuar." << endl;
+		exit(1);
 	}else{
-		cout << token->getTableEntry()->getLexeme() << " esperado na linha " <<
-		token->getTableEntry()->getLineNumber() << endl;
+		cout << "Análise sintática realizada com sucesso. Nenhum erro foi encontrado." << endl;
 	}
 }
+
+
+
+
+void SyntaxAnalyzer::print_syntactic_error(Token* token){
+
+	cout << "TOKEN ESPERADO:\t" << token->getToken() << endl;
+	cout << "TOKEN ENCONTRADO:\t" << token->getTableEntry()->getToken() << endl;
+	cout << "LEXEMA:\t\t\t" << token->getTableEntry()->getLexeme() << endl;
+	cout << "LINHA:\t\t\t" << token->getTableEntry()->getLineNumber() << endl;
+	cout << "POS:\t\t\t" << token->getTableEntry()->getLinePos() << endl;
+
+	if(token->getToken() == "ID" || token->getToken() == "NUMBER"){
+		cout << token->getTableEntry()->getLexeme() << " esperado na linha " <<
+		token->getTableEntry()->getLineNumber() << endl;
+	}else{
+		cout << token->getToken() << " esperado na linha " <<
+		token->getTableEntry()->getLineNumber() << endl;
+	}
+
+	exit(1);
+}
+
+
+
 
 bool synchronize(Token* token, int& index, vector<Token*>* token_vector){
 	return true;
 }
+
+
+
 
 bool SyntaxAnalyzer::match(Token* token, int& index, vector<Token*>* token_vector){
 	if(token_vector->at(index)->getToken() == token->getToken()){
@@ -23,6 +70,9 @@ bool SyntaxAnalyzer::match(Token* token, int& index, vector<Token*>* token_vecto
 		return synchronize(token, index, token_vector);
 	}
 }
+
+
+
 
 vector<Declaration*>* SyntaxAnalyzer::declarations_list(vector<Token*>* token_vector, int& index){
 	int current_type = -1;
@@ -55,6 +105,9 @@ vector<Declaration*>* SyntaxAnalyzer::declarations_list(vector<Token*>* token_ve
 	}
 }
 
+
+
+
 int SyntaxAnalyzer::type(vector<Token*>* token_vector, int& index){
 	int current_type = -1;
 
@@ -69,6 +122,9 @@ int SyntaxAnalyzer::type(vector<Token*>* token_vector, int& index){
 
 	return current_type;
 }
+
+
+
 
 vector<Declaration*>* SyntaxAnalyzer::declarations_list2(vector<Token*>* token_vector, int& index, int current_type){
 	if(token_vector->at(index)->getToken() == "COMMA"){
@@ -105,6 +161,8 @@ vector<Declaration*>* SyntaxAnalyzer::declarations_list2(vector<Token*>* token_v
 }
 
 
+
+
 vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, int& index){
 	vector<Command*>* command_vector = new vector<Command*>;
 
@@ -112,13 +170,23 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 		match(new Token("PCOMMA", token_vector->at(index)->getTableEntry()), index, token_vector);
 	}
 
+    // ================================================================================================
+
 	if(token_vector->at(index)->getToken() == "LBRACE"){
 		match(new Token("LBRACE", token_vector->at(index)->getTableEntry()), index, token_vector);
-		vector<Command*>* c = commands_list(token_vector, index);
+
+        vector<Command*>* c = NULL;
+        string tq = token_vector->at(index)->getToken();
+        while(tq == "ID" || tq == "PRINT" || tq == "READ" || tq == "WHILE" || tq == "IF"){
+		    c = commands_list(token_vector, index);
+            tq = token_vector->at(index)->getToken();
+        }
+
 		match(new Token("RBRACE", token_vector->at(index)->getTableEntry()), index, token_vector);
 		return c;
 	}
 
+    // ================================================================================================
 
 	if(token_vector->at(index)->getToken() == "ID"){
 		Temp* temp = new Temp;
@@ -160,7 +228,9 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 	if(token_vector->at(index)->getToken() == "WHILE"){
 		match(new Token("WHILE", token_vector->at(index)->getTableEntry()), index, token_vector);
 		match(new Token("LBRACKET", token_vector->at(index)->getTableEntry()), index, token_vector);
+
 		Expr* e = expression(token_vector, index);
+
 		match(new Token("RBRACKET", token_vector->at(index)->getTableEntry()), index, token_vector);
 		vector<Command*>* c = commands_list(token_vector, index);
 		While* w = new While(e, c->at(0));
@@ -193,6 +263,8 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 
 	return nullptr;
 }
+
+
 
 
 Expr* SyntaxAnalyzer::expression(vector<Token*>* token_vector, int& index){
@@ -331,32 +403,4 @@ SyntaxAnalyzer::SyntaxAnalyzer(AbstractSyntaxTree* ast, vector<Token*>* token_ve
 	this->ast = ast;
 	this->token_vector = token_vector;
 	has_error = new bool(false);
-}
-
-void SyntaxAnalyzer::faz_o_urro(int& index){
-	//(flagErro variavel global ou um atributo da classe AnalisadorSintatico)
-    *has_error = false;
-
-	match(new Token("LBRACE",token_vector->at(index)->getTableEntry()), index, token_vector);
-
-	vector<Declaration*>* decl_list = declarations_list(token_vector, index);
-	ast->set_declarations(decl_list);
-
-	vector<Command*>* comm_list = new vector<Command*>;
-
-    string tk = token_vector->at(index)->getToken();
-	while(((token_vector->size() - 1) > index) && tk == "PCOMMA" || tk == "LBRACE" || tk == "ID" || tk == "IF" || tk == "WHILE" || tk == "READ" || tk == "PRINT"){
-		comm_list = commands_list(token_vector, index);
-		ast->get_commands()->push_back(comm_list->at(0));
-		tk = token_vector->at(index)->getToken();
-	}
-
-    match(new Token("RBRACE",token_vector->at(index)->getTableEntry()), index, token_vector);
-
-	if(*has_error){
-		cout << "Foram encontrados erros sintáticos no código. A compilação não pode continuar." << endl;
-		exit(1);
-	}else{
-		cout << "Análise sintática realizada com sucesso. Nenhum erro foi encontrado." << endl;
-	}
 }

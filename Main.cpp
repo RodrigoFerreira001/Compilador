@@ -25,11 +25,11 @@ int main(int argc, char **argv){
             cout << "Token: " << it->second->getToken() << endl;
     		cout << "Lexema: " << it->second->getLexeme() << endl;
     		cout << "Posição:\n";
-            cout << "\tLinha" <<it->second->getLineNumber() << ", Coluna " << it->second->getLinePos() << endl;
+            cout << "\tLinha " <<it->second->getLineNumber() << ", Coluna " << it->second->getLinePos() << endl;
 
             tmp = it->second->getNextEntry();
             while(tmp != NULL){
-                cout << "\tLinha" <<tmp->getLineNumber() << ", Coluna " << tmp->getLinePos() << endl;
+                cout << "\tLinha " <<tmp->getLineNumber() << ", Coluna " << tmp->getLinePos() << endl;
                 tmp = tmp->getNextEntry();
             }
             cout << "\n\n";
@@ -40,11 +40,11 @@ int main(int argc, char **argv){
     		cout << "Lexema: " << it->second->getLexeme() << endl;
             cout << "Valor: " << it->second->getValue() << endl;
     		cout << "Posição:\n";
-            cout << "\tLinha" <<it->second->getLineNumber() << ", Coluna " << it->second->getLinePos() << endl;
+            cout << "\tLinha " <<it->second->getLineNumber() << ", Coluna " << it->second->getLinePos() << endl;
 
             tmp = it->second->getNextEntry();
             while(tmp != NULL){
-                cout << "\tLinha" <<tmp->getLineNumber() << ", Coluna " << tmp->getLinePos() << endl;
+                cout << "\tLinha " <<tmp->getLineNumber() << ", Coluna " << tmp->getLinePos() << endl;
                 tmp = tmp->getNextEntry();
             }
             cout << "\n\n";
@@ -53,14 +53,26 @@ int main(int argc, char **argv){
 
     cout << "Token Vector Content:" << endl;
     for(int i = 0; i < tokenVector->size(); i++){
-        cout << i << ": " << tokenVector->at(i)->getToken() << endl;
+        cout << i << ": " << tokenVector->at(i)->getToken() << "\t\tLinha: " << tokenVector->at(i)->getTableEntry()->getLineNumber() << endl;
     }
 
-	cout << "Chamando analizador sintático" << endl;
+	cout << "\n ====================== Chamando analizador sintático ====================== \n" << endl;
 	int index = 0;
 	AbstractSyntaxTree ast;
 	SyntaxAnalyzer syntax_analyzer(&ast, tokenVector);
 	syntax_analyzer.faz_o_urro(index);
 
+    for(int i = 0; i < ast.get_declarations()->size(); ++i){
+        cout << "TOKEN DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_table_entry()->getToken() << endl;
+        cout << "LEXEMA DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_table_entry()->getLexeme() << endl;
+        cout << "LEXEMA DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_type() << endl;
+        cout << endl;
+    }
+
+    for(int i = 0; i < ast.get_commands()->size(); ++i){
+        //cout << "TOKEN DECLARAÇÃO: " << ast.get_commands()->at(i)->getToken() << endl;
+        //cout << "LEXEMA DECLARAÇÃO: " << ast.get_commands()->at(i)->get_table_entry()->getLexeme() << endl;
+        //cout << endl;
+    }
     return 0;
 }
