@@ -10,7 +10,7 @@ private:
 
 public:
 	Expr();
-	Expr(int type, int i_value, float f_value, bool b_value);
+	Expr(int type, int i_value, float f_value, bool b_value, string c_type);
 	~Expr();
 
 	void set_type(int type);
