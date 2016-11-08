@@ -10,10 +10,8 @@ public:
 	Expr* get_expr();
 	Command* get_c_true();
 	Command* get_c_false();
-	string get_type_name();
 
 private:
-	string type_class;
 	Expr* e;
 	Command* c_true;
 	Command* c_false;

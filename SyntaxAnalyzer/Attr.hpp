@@ -9,10 +9,8 @@ public:
 	~Attr();
 	Id* get_id();
 	Expr* get_expr();
-	string get_type_name();
 
 	private:
-		string type_class;
 		Id* id;
 		Expr* e;
 };

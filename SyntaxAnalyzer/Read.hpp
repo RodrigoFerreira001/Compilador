@@ -8,9 +8,7 @@ public:
 	Read(Id* id);
 	~Read();
 	Id* get_id();
-	string get_type_name();
 
 private:
 	Id* id;
-	string type_class;
 };
