@@ -5,7 +5,7 @@
 class While : public Command{
 public:
 	While();
-	While(Expr* e, Command* c_true);
+	While(Expr* e, Command* c_true, string c_type);
 	~While();
 	Expr* get_expr();
 	Command* get_c_true();

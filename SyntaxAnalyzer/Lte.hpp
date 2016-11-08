@@ -5,7 +5,7 @@
 class Lte : public Expr{
 public:
 	Lte();
-	Lte(Expr* e1, Expr* e2);
+	Lte(Expr* e1, Expr* e2, string c_type);
 	~Lte();
 	Expr* get_expr_1();
 	Expr* get_expr_2();

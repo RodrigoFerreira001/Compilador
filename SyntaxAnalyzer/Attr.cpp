@@ -4,7 +4,7 @@ Attr::Attr(){
 
 }
 
-Attr::Attr(Id* id, Expr* e){
+Attr::Attr(Id* id, Expr* e, string c_type) : Command(c_type){
 	this->id = id;
 	this->e = e;
 }
