@@ -4,7 +4,7 @@ And::And(){
 
 }
 
-And::And(Expr* e1, Expr* e2){
+And::And(Expr* e1, Expr* e2, string type) : Command(type){
 	this->e1 = e1;
 	this->e2 = e2;
 }
