@@ -1,9 +1,5 @@
 #include "If.hpp"
 
-If::If(){
-
-}
-
 If::If(Expr* e, Command* c_true, Command* c_false, string c_type) : Command(c_type){
 	this->e = e;
 	this->c_true = c_true;
@@ -11,7 +7,9 @@ If::If(Expr* e, Command* c_true, Command* c_false, string c_type) : Command(c_ty
 }
 
 If::~If(){
-
+	delete e;
+	delete c_true;
+	delete c_false;
 }
 
 Expr* If::get_expr(){

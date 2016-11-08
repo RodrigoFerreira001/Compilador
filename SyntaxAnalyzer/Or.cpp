@@ -1,16 +1,13 @@
 #include "Or.hpp"
 
-Or::Or(){
-
-}
-
 Or::Or(Expr* e1, Expr* e2, string c_type) : Expr(c_type){
 	this->e1 = e1;
 	this->e2 = e2;
 }
 
 Or::~Or(){
-
+	delete e1;
+	delete e2;
 }
 
 Expr* Or::get_expr_1(){

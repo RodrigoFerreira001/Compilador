@@ -1,16 +1,13 @@
 #include "Eq.hpp"
 
-Eq::Eq(){
-
-}
-
 Eq::Eq(Expr* e1, Expr* e2, string c_type) : Expr(c_type){
 	this->e1 = e1;
 	this->e2 = e2;
 }
 
 Eq::~Eq(){
-
+	delete e1;
+	delete e2;
 }
 
 Expr* Eq::get_expr_1(){
