@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <stirng>
+#include <string>
 using namespace std;
 
 class Command{
