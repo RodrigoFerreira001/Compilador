@@ -31,4 +31,5 @@ public:
 	void ungetChar();
 	int getCurrentLine();
 	int getCurrentPos();
+	void removeLine();
 };
