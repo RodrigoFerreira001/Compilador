@@ -178,7 +178,7 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
         vector<Command*>* c = NULL;
         string tq = token_vector->at(index)->getToken();
         while(tq == "ID" || tq == "PRINT" || tq == "READ" || tq == "WHILE" || tq == "IF"){
-		    c = commands_list(token_vector, index);
+		        c = commands_list(token_vector, index);
             tq = token_vector->at(index)->getToken();
         }
 
@@ -190,12 +190,12 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 
 	if(token_vector->at(index)->getToken() == "ID"){
 		Temp* temp = new Temp;
-		Id* id = new Id(token_vector->at(index)->getTableEntry(), true, token_vector->at(index)->getTableEntry()->get_var_decl(), token_vector->at(index)->getTableEntry()->get_type(), temp);
+		Id* id = new Id(token_vector->at(index)->getTableEntry(), true, token_vector->at(index)->getTableEntry()->get_var_decl(), token_vector->at(index)->getTableEntry()->get_type(), temp, "ID");
 
 		match(new Token("ID", token_vector->at(index)->getTableEntry()), index, token_vector);
 		match(new Token("ATTR", token_vector->at(index)->getTableEntry()), index, token_vector);
 
-		Attr* attr = new Attr(id, expression(token_vector, index));
+		Attr* attr = new Attr(id, expression(token_vector, index), "ATTR");
 		match(new Token("PCOMMA", token_vector->at(index)->getTableEntry()), index, token_vector);
 		command_vector->push_back(attr);
 		return command_vector;
@@ -215,10 +215,10 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 			vector<Command*>* c2 = commands_list(token_vector, index);
 
 			if(c2->size() > 0){
-				if_ = new If(e, c->at(0), c2->at(0));
+				if_ = new If(e, c->at(0), c2->at(0), "IF");
 				command_vector->push_back(if_);
 			}else{
-				if_ = new If(e, c->at(0), nullptr);
+				if_ = new If(e, c->at(0), nullptr, "IF");
 				command_vector->push_back(if_);
 			}
 		}
@@ -233,7 +233,7 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 
 		match(new Token("RBRACKET", token_vector->at(index)->getTableEntry()), index, token_vector);
 		vector<Command*>* c = commands_list(token_vector, index);
-		While* w = new While(e, c->at(0));
+		While* w = new While(e, c->at(0), "WHILE");
 		command_vector->push_back(w);
 		return command_vector;
 	}
@@ -243,8 +243,8 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 		if(token_vector->at(index)->getToken() == "ID"){
 
 			Temp* temp = new Temp;
-			Id* id = new Id(token_vector->at(index)->getTableEntry(), true, token_vector->at(index)->getTableEntry()->get_var_decl(), token_vector->at(index)->getTableEntry()->get_type(), temp);
-			Read* r = new Read(id);
+			Id* id = new Id(token_vector->at(index)->getTableEntry(), true, token_vector->at(index)->getTableEntry()->get_var_decl(), token_vector->at(index)->getTableEntry()->get_type(), temp, "ID");
+			Read* r = new Read(id, "READ");
 			match(new Token("ID", token_vector->at(index)->getTableEntry()), index, token_vector);
 			match(new Token("PCOMMA", token_vector->at(index)->getTableEntry()), index, token_vector);
 			command_vector->push_back(r);
@@ -255,7 +255,7 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 	if(token_vector->at(index)->getToken() == "PRINT"){
 		match(new Token("PRINT", token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e = expression(token_vector, index);
-		Print* p = new Print(e);
+		Print* p = new Print(e, "PRINT");
 		match(new Token("PCOMMA", token_vector->at(index)->getTableEntry()), index, token_vector);
 		command_vector->push_back(p);
 		return command_vector;
@@ -272,7 +272,7 @@ Expr* SyntaxAnalyzer::expression(vector<Token*>* token_vector, int& index){
 	if(token_vector->at(index)->getToken() == "OR"){
 		match(new Token("OR", token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e2 = conjunction(token_vector, index);
-		return new Or(e1, e2);
+		return new Or(e1, e2, "OR");
 	}
 	return e1;
 }
@@ -283,7 +283,7 @@ Expr* SyntaxAnalyzer::conjunction(vector<Token*>* token_vector, int& index){
 	if(token_vector->at(index)->getToken() == "AND"){
 		match(new Token("AND", token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e2 = equal(token_vector, index);
-		return new And(e1, e2);
+		return new And(e1, e2, "AND");
 	}
 	return e1;
 }
@@ -295,13 +295,13 @@ Expr* SyntaxAnalyzer::equal(vector<Token*>* token_vector, int& index){
 	if(token_vector->at(index)->getToken() == "EQUAL"){
 		match(new Token("EQUAL", token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e2 = relation(token_vector, index);
-		return new Eq(e1, e2);
+		return new Eq(e1, e2, "EQUAL");
 	}
 
 	if(token_vector->at(index)->getToken() == "NE"){
 		match(new Token("NE", token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e2 = relation(token_vector, index);
-		return new Ne(e1, e2);
+		return new Ne(e1, e2, "NE");
 	}
 
 	return e1;
@@ -313,25 +313,25 @@ Expr* SyntaxAnalyzer::relation(vector<Token*>* token_vector, int& index){
 	if(token_vector->at(index)->getToken() == "LT"){
 		match(new Token("LT",token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e2 = plus(token_vector, index);
-		Lt* lt = new Lt(e1,e2);
+		Lt* lt = new Lt(e1, e2, "LT");
 		return lt;
 	}else
 	if(token_vector->at(index)->getToken() == "GT"){
 			match(new Token("GT",token_vector->at(index)->getTableEntry()), index, token_vector);
 			Expr* e2 = plus(token_vector, index);
-			Gt* gt = new Gt(e1,e2);
+			Gt* gt = new Gt(e1, e2, "GT");
 			return gt;
 	}else
 	if(token_vector->at(index)->getToken() == "LTE"){
 			match(new Token("LTE",token_vector->at(index)->getTableEntry()), index, token_vector);
 			Expr* e2 = plus(token_vector, index);
-			Lte* le = new Lte(e1,e2);
+			Lte* le = new Lte(e1, e2, "LTE");
 			return le;
 	}else
 	if(token_vector->at(index)->getToken() == "GTE"){
 			match(new Token("GTE",token_vector->at(index)->getTableEntry()), index, token_vector);
 			Expr* e2 = plus(token_vector, index);
-			Gte* ge = new Gte(e1,e2);
+			Gte* ge = new Gte(e1, e2, "GTE");
 			return ge;
 	}
 
@@ -343,13 +343,13 @@ Expr* SyntaxAnalyzer::plus(vector<Token*>* token_vector, int& index){
 	if(token_vector->at(index)->getToken() == "PLUS"){
 		match(new Token("PLUS", token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e2 = term(token_vector, index);
-		Plus* a = new Plus(e1,e2);
+		Plus* a = new Plus(e1, e2, "PLUS");
 		return a;
 	}else{
 		if(token_vector->at(index)->getToken() == "MINUS"){
 			match(new Token("MINUS", token_vector->at(index)->getTableEntry()), index, token_vector);
 			Expr* e2 = term(token_vector, index);
-			Minus* m = new Minus(e1,e2);
+			Minus* m = new Minus(e1, e2, "MINUS");
 			return m;
 		}
 	}
@@ -361,13 +361,13 @@ Expr* SyntaxAnalyzer::term(vector<Token*>* token_vector, int& index){
 	if(token_vector->at(index)->getToken() == "TIMES"){
 		match(new Token("TIMES",token_vector->at(index)->getTableEntry()), index, token_vector);
 		Expr* e2 = factor(token_vector, index);
-		Mult* mu = new Mult(e1,e2);
+		Mult* mu = new Mult(e1, e2, "MULT");
 		return mu;
 	}else{
 		if(token_vector->at(index)->getToken() == "DIV"){
 			match(new Token("DIV",token_vector->at(index)->getTableEntry()), index, token_vector);
 			Expr* e2 = factor(token_vector, index);
-			Div* d = new Div(e1,e2);
+			Div* d = new Div(e1, e2, "DIV");
 			return d;
 		}
 	}
@@ -379,7 +379,7 @@ Expr* SyntaxAnalyzer::factor(vector<Token*>* token_vector, int& index){
 
 	if(token_vector->at(index)->getToken() == "ID"){
 		Temp* temp = new Temp;
-		Id* id = new Id(token_vector->at(index)->getTableEntry(), false, token_vector->at(index)->getTableEntry()->get_var_decl(), token_vector->at(index)->getTableEntry()->get_type(), temp);
+		Id* id = new Id(token_vector->at(index)->getTableEntry(), false, token_vector->at(index)->getTableEntry()->get_var_decl(), token_vector->at(index)->getTableEntry()->get_type(), temp, "ID");
 		match(new Token("ID",token_vector->at(index)->getTableEntry()), index, token_vector);
 		return id;
 	}else
