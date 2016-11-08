@@ -4,7 +4,7 @@ Lte::Lte(){
 
 }
 
-Lte::Lte(Expr* e1, Expr* e2){
+Lte::Lte(Expr* e1, Expr* e2, string c_type) : Expr(c_type){
 	this->e1 = e1;
 	this->e2 = e2;
 }

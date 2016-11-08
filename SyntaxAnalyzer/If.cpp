@@ -4,7 +4,7 @@ If::If(){
 
 }
 
-If::If(Expr* e, Command* c_true, Command* c_false){
+If::If(Expr* e, Command* c_true, Command* c_false, string c_type) : Command(c_type){
 	this->e = e;
 	this->c_true = c_true;
 	this->c_false = c_false;
