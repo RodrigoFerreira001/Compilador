@@ -70,6 +70,12 @@ void Buffer::ungetChar(){
 
 }
 
+void Buffer::ungetLine(int line){
+	(*(this->currentLine)) -= line;
+
+}
+
+
 bool Buffer::eob(){
 	if(fileIsEmpty() && (*(this->bI)) == this->buffer->length())
 		return true;

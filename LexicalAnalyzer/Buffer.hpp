@@ -32,4 +32,5 @@ public:
 	int getCurrentLine();
 	int getCurrentPos();
 	void removeLine();
+	void ungetLine(int line);
 };
