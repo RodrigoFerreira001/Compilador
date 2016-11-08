@@ -1,0 +1,12 @@
+{
+    int i, inc, j;
+    i = 0;
+    inc = 2;
+    read j;
+
+    while(i < j)
+    {
+      i = i + inc;
+    	print 1;
+		}
+}

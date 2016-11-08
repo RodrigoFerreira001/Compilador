@@ -9,11 +9,10 @@
     while(i < j)
     {
         i = i + inc;
-        a = a*i;
+        a = a * i;
     }
     if(a > 10.0)
     {
         print 1;
-        a = 9;
     }
 }
