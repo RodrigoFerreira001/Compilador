@@ -1,6 +1,6 @@
 #include "Num.hpp"
 
-Num::Num(TableEntry* table_entry, int type){
+Num::Num(TableEntry* table_entry, int type, string c_type) : Expr(c_type){
 	this->table_entry = table_entry;
 	this->type = new int(type);
 }

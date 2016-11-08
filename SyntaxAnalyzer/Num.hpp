@@ -6,8 +6,9 @@ class Num : public Expr{
 private:
 	TableEntry* table_entry;
 	int* type;
+	
 public:
-	Num(TableEntry* table_entry, int type);
+	Num(TableEntry* table_entry, int type, string c_type);
 	~Num();
 	TableEntry* get_table_entry();
 	int get_type();

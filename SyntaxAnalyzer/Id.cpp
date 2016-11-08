@@ -1,6 +1,6 @@
 #include "Id.hpp"
 
-Id::Id(TableEntry* table_entry, bool is_l_value, bool is_var_decl, int type, Temp* temp){
+Id::Id(TableEntry* table_entry, bool is_l_value, bool is_var_decl, int type, Temp* temp, string c_type) : Expr(c_type){
 	this->table_entry = table_entry;
 	this->temp = temp;
 	this->is_l_value = new bool(is_l_value);

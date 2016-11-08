@@ -3,11 +3,11 @@
 #include "Id.hpp"
 
 class Print : public Command{
-public:
-	Print(Expr* e);
-	~Print();
-	Expr* get_expr();
-
 private:
 	Expr* e;
+	
+public:
+	Print(Expr* e, string c_type);
+	~Print();
+	Expr* get_expr();
 };

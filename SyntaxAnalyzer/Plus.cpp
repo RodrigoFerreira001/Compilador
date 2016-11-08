@@ -1,16 +1,13 @@
 #include "Plus.hpp"
 
-Plus::Plus(){
-
-}
-
-Plus::Plus(Expr* e1, Expr* e2){
+Plus::Plus(Expr* e1, Expr* e2, string c_type){
 	this->e1 = e1;
 	this->e2 = e2;
 }
 
 Plus::~Plus(){
-
+	delete e1;
+	delete e2;
 }
 
 Expr* Plus::get_expr_1(){

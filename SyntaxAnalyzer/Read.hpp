@@ -3,12 +3,11 @@
 #include "Id.hpp"
 
 class Read : public Command{
-public:
-	Read();
-	Read(Id* id);
-	~Read();
-	Id* get_id();
-
 private:
 	Id* id;
+
+public:
+	Read(Id* id, string c_type);
+	~Read();
+	Id* get_id();
 };
