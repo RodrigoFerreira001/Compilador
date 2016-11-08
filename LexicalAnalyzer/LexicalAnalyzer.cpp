@@ -10,6 +10,7 @@ void LexicalAnalyzer::doTheThing(){
 
 	int state = 0;
 	int linha_debug = 0;
+	int linha_debug2 = 0;
 	int strPos;
 	char c;
 	string lexeme;
@@ -218,11 +219,16 @@ void LexicalAnalyzer::doTheThing(){
 				break;
 
 			case 7:
+				linha_debug = this->charBuffer->getCurrentLine();
 				c = this->charBuffer->getNextChar();
+				linha_debug2 = this->charBuffer->getCurrentLine();
 				if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9'){
 					lexeme.push_back(c);
 					state = 7;
 				}else{
+					if (linha_debug2 - linha_debug != 0){
+						this->charBuffer->ungetLine(1);
+					}
 					this->charBuffer->ungetChar();
 					if(lexeme == "int"){
 						strPos =  this->charBuffer->getCurrentPos() - 2;
@@ -289,6 +295,7 @@ void LexicalAnalyzer::doTheThing(){
 			case 8:
 				linha_debug = this->charBuffer->getCurrentLine();
 				c = this->charBuffer->getNextChar();
+				linha_debug2 = this->charBuffer->getCurrentLine();
 				if (c >= '0' && c <= '9'){
 					lexeme.push_back(c);
 					state = 8;
@@ -299,9 +306,10 @@ void LexicalAnalyzer::doTheThing(){
 					float stringvalue;
 					stringstream str(lexeme);
 					str >> stringvalue;
-
 					strPos =  this->charBuffer->getCurrentPos() - lexeme.size();
-
+					if (linha_debug2 - linha_debug != 0){
+						this->charBuffer->ungetLine(1);
+					}
 					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER", linha_debug/*this->charBuffer->getCurrentLine()*/, strPos, stringvalue);
 					Token* token = new Token("NUMBER", tableEntry);
 					this->tokenVector->push_back(token);
@@ -309,11 +317,15 @@ void LexicalAnalyzer::doTheThing(){
 					this->charBuffer->ungetChar();
 					lexeme.clear();
 					state = 0;
+
 				}
 				break;
 
 			case 9:
+				linha_debug = this->charBuffer->getCurrentLine();
 				c = this->charBuffer->getNextChar();
+				linha_debug2 = this->charBuffer->getCurrentLine();
+
 				if (c >= '0' && c <= '9'){
 					lexeme.push_back(c);
 					state = 9;
@@ -322,7 +334,10 @@ void LexicalAnalyzer::doTheThing(){
 					float stringvalue;
 					stringstream str(lexeme);
 					str >> stringvalue;
-					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER",this->charBuffer->getCurrentLine(), strPos, stringvalue);
+					if (linha_debug2 - linha_debug != 0){
+						this->charBuffer->ungetLine(1);
+					}
+					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER",linha_debug/*this->charBuffer->getCurrentLine()*/, strPos, stringvalue);
 					Token* token = new Token("NUMBER", tableEntry);
 					this->tokenVector->push_back(token);
 					this->symbolTable->insertEntry(tableEntry);
