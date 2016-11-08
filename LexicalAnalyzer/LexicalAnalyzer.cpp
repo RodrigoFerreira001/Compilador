@@ -9,6 +9,7 @@ LexicalAnalyzer::LexicalAnalyzer(Buffer* charBuffer, vector<Token*>* tokenVector
 void LexicalAnalyzer::doTheThing(){
 
 	int state = 0;
+	int linha_debug = 0;
 	int strPos;
 	char c;
 	string lexeme;
@@ -286,6 +287,7 @@ void LexicalAnalyzer::doTheThing(){
 				break;
 
 			case 8:
+				linha_debug = this->charBuffer->getCurrentLine();
 				c = this->charBuffer->getNextChar();
 				if (c >= '0' && c <= '9'){
 					lexeme.push_back(c);
@@ -300,7 +302,7 @@ void LexicalAnalyzer::doTheThing(){
 
 					strPos =  this->charBuffer->getCurrentPos() - lexeme.size();
 
-					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER",this->charBuffer->getCurrentLine(), strPos, stringvalue);
+					TableEntry* tableEntry = new TableEntry(lexeme,"NUMBER", linha_debug/*this->charBuffer->getCurrentLine()*/, strPos, stringvalue);
 					Token* token = new Token("NUMBER", tableEntry);
 					this->tokenVector->push_back(token);
 					this->symbolTable->insertEntry(tableEntry);
