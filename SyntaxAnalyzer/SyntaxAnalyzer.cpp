@@ -33,7 +33,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "AND"){
 		And* a = (And*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << a->get_c_type() << endl;
 		index++;
@@ -45,7 +45,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "ATTR"){
 		Attr* a = (Attr*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << a->get_c_type() << endl;
 		index++;
@@ -57,7 +57,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "DIV"){
 		Div* d = (Div*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << d->get_c_type() << endl;
 		index++;
@@ -69,7 +69,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "EQ"){
 		Eq* e = (Eq*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << e->get_c_type() << endl;
 		index++;
@@ -81,7 +81,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "EXPR"){
 		Expr* e = (Expr* ) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << e->get_c_type() << endl;
 		index--;
@@ -89,7 +89,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "GT"){
 		Gt* g = (Gt*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << g->get_c_type() << endl;
 		index++;
@@ -101,7 +101,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "GTE"){
 		Gte* g = (Gte*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << g->get_c_type() << endl;
 		index++;
@@ -113,7 +113,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "ID"){
 		Id* i = (Id*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << i->get_c_type() << endl;
 		index--;
@@ -121,13 +121,15 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "IF"){
 		If* i = (If*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << i->get_c_type() << endl;
 		index++;
 		print_ast(i->get_expr(), index);
-		index++;
-		print_ast(i->get_c_false(), index);
+		if(i->get_c_false() != nullptr){
+			index++;
+			print_ast(i->get_c_false(), index);
+		}
 		index++;
 		print_ast(i->get_c_true(), index);
 		index--;
@@ -135,7 +137,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "LT"){
 		Lt* l = (Lt*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << l->get_c_type() << endl;
 		index++;
@@ -147,7 +149,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "LTE"){
 		Lte* l = (Lte*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << l->get_c_type() << endl;
 		index++;
@@ -159,7 +161,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "MINUS"){
 		Minus* m = (Minus*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << m->get_c_type() << endl;
 		index++;
@@ -171,7 +173,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "MULT"){
 		Mult* m = (Mult*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << m->get_c_type() << endl;
 		index++;
@@ -183,7 +185,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "NE"){
 		Ne* n = (Ne*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << n->get_c_type() << endl;
 		index++;
@@ -195,7 +197,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "NUM"){
 		Num* n = (Num*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << n->get_c_type() << endl;
 		index--;
@@ -203,7 +205,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "OR"){
 		Or* o = (Or*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << o->get_c_type() << endl;
 		index++;
@@ -215,7 +217,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "PLUS"){
 		Plus* p = (Plus*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << p->get_c_type() << endl;
 		index++;
@@ -227,7 +229,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "PRINT"){
 		Print* p = (Print*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << p->get_c_type() << endl;
 		index++;
@@ -237,7 +239,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "READ"){
 		Read* r = (Read*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << r->get_c_type() << endl;
 		index++;
@@ -247,7 +249,7 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 	if(c->get_c_type() == "WHILE"){
 		While* w = (While*) c;
 		for(int j = 0; j < index; j++){
-			cout << "    ";
+			cout << "_";
 		}
 		cout << w->get_c_type() << endl;
 		index++;
@@ -261,11 +263,11 @@ void SyntaxAnalyzer::print_ast(Command* c, int& index){
 
 void SyntaxAnalyzer::print_syntactic_error(Token* token){
 
-	cout << "TOKEN ESPERADO:    " << token->getToken() << endl;
-	cout << "TOKEN ENCONTRADO:    " << token->getTableEntry()->getToken() << endl;
-	cout << "LEXEMA:            " << token->getTableEntry()->getLexeme() << endl;
-	cout << "LINHA:            " << token->getTableEntry()->getLineNumber() << endl;
-	cout << "POS:            " << token->getTableEntry()->getLinePos() << endl;
+	cout << "TOKEN ESPERADO:_" << token->getToken() << endl;
+	cout << "TOKEN ENCONTRADO:_" << token->getTableEntry()->getToken() << endl;
+	cout << "LEXEMA:___" << token->getTableEntry()->getLexeme() << endl;
+	cout << "LINHA:___" << token->getTableEntry()->getLineNumber() << endl;
+	cout << "POS:___" << token->getTableEntry()->getLinePos() << endl;
 
 	if(token->getToken() == "ID" || token->getToken() == "NUMBER"){
 		cout << token->getTableEntry()->getLexeme() << " esperado na linha " <<
@@ -402,7 +404,7 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 	if(token_vector->at(index)->getToken() == "LBRACE"){
 		match(new Token("LBRACE", token_vector->at(index)->getTableEntry()), index, token_vector);
 
-        vector<Command*>* c = NULL;
+        vector<Command*>* c = nullptr;
         string tq = token_vector->at(index)->getToken();
         while(tq == "ID" || tq == "PRINT" || tq == "READ" || tq == "WHILE" || tq == "IF"){
 		        c = commands_list(token_vector, index);
@@ -448,7 +450,10 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 				if_ = new If(e, c->at(0), nullptr, "IF");
 				command_vector->push_back(if_);
 			}
-		}
+		}else{
+            if_ = new If(e, c->at(0), nullptr, "IF");
+            command_vector->push_back(if_);
+        }
 		return command_vector;
 	}
 
@@ -488,7 +493,7 @@ vector<Command*>* SyntaxAnalyzer::commands_list(vector<Token*>* token_vector, in
 		return command_vector;
 	}
 
-	return nullptr;
+	return command_vector;
 }
 
 
@@ -530,7 +535,6 @@ Expr* SyntaxAnalyzer::equal(vector<Token*>* token_vector, int& index){
 		Expr* e2 = relation(token_vector, index);
 		return new Ne(e1, e2, "NE");
 	}
-
 	return e1;
 }
 
