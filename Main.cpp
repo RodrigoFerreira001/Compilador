@@ -62,14 +62,19 @@ int main(int argc, char **argv){
 	SyntaxAnalyzer syntax_analyzer(&ast, tokenVector);
 	syntax_analyzer.faz_o_urro(index);
 
+	cout << "Declarations List Content:" << endl;
+	cout << ast.get_declarations()->size() << endl;
     for(int i = 0; i < ast.get_declarations()->size(); ++i){
-        //cout << "TOKEN DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_table_entry()->getToken() << endl;
-        //cout << "LEXEMA DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_table_entry()->getLexeme() << endl;
-        //cout << "TIPO DA DECLARAÇÃO: " << ast.get_declarations()->at(i)->get_type() << endl;
-        //cout << endl;
+		cout << "Declaration " << i << ":" << endl;
+		cout << "Lexeme: " << ast.get_declarations()->at(i)->get_table_entry()->getLexeme() << endl;
+		cout << "On Line: " << ast.get_declarations()->at(i)->get_table_entry()->getLineNumber() << endl << endl;
     }
 
+	cout << "Abstract Syntax Tree Content:" << endl;
+
     for(int i = 0; i < ast.get_commands()->size(); ++i){
+		index = 0;
+		syntax_analyzer.print_ast(ast.get_commands()->at(i), index);
         //cout << "TOKEN DECLARAÇÃO: " << ast.get_commands()->at(i)->getToken() << endl;
         //cout << "LEXEMA DECLARAÇÃO: " << ast.get_commands()->at(i)->get_table_entry()->getLexeme() << endl;
         //cout << endl;

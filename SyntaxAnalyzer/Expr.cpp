@@ -1,11 +1,6 @@
 #include "Expr.hpp"
 
-Expr::Expr(){
-	type = new int;
-	i_value = new int;
-	f_value = new float;
-	b_value = new bool;
-}
+Expr::Expr(string c_type) : Command(c_type){}
 
 Expr::Expr(int type, int i_value, float f_value, bool b_value, string c_type) : Command(c_type){
 	this->type = new int;

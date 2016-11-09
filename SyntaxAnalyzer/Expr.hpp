@@ -9,7 +9,7 @@ private:
 	bool* b_value;
 
 public:
-	Expr();
+	Expr(string c_type);
 	Expr(int type, int i_value, float f_value, bool b_value, string c_type);
 	~Expr();
 

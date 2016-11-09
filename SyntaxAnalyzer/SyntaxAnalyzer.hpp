@@ -31,4 +31,5 @@ private:
 public:
 	SyntaxAnalyzer(AbstractSyntaxTree* ast, vector<Token*>* token_vector);
 	void faz_o_urro(int& index);
+	void print_ast(Command* c, int& index);
 };
