@@ -75,9 +75,6 @@ int main(int argc, char **argv){
     for(int i = 0; i < ast.get_commands()->size(); ++i){
 		index = 0;
 		syntax_analyzer.print_ast(ast.get_commands()->at(i), index);
-        //cout << "TOKEN DECLARAÇÃO: " << ast.get_commands()->at(i)->getToken() << endl;
-        //cout << "LEXEMA DECLARAÇÃO: " << ast.get_commands()->at(i)->get_table_entry()->getLexeme() << endl;
-        //cout << endl;
     }
     return 0;
 }
