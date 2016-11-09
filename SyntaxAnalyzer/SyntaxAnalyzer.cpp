@@ -271,10 +271,10 @@ void SyntaxAnalyzer::print_syntactic_error(Token* token){
 
 	if(token->getToken() == "ID" || token->getToken() == "NUMBER"){
 		cout << token->getTableEntry()->getLexeme() << " esperado na linha " <<
-		token->getTableEntry()->getLineNumber() << endl;
+		token->getTableEntry()->getLineNumber() - 1<< endl;
 	}else{
 		cout << token->getToken() << " esperado na linha " <<
-		token->getTableEntry()->getLineNumber() << endl;
+		token->getTableEntry()->getLineNumber() - 1 << endl;
 	}
 
 	exit(1);
